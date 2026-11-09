@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ROSE FLORA Extrait de Parfum | YOJAKI DE LUXE</title>
+  <meta name="description" content="ROSE FLORA Extrait de Parfum by Maison Yojaki. Hand-harvested Damask rose, velvet French peony, Bourbon vanilla, and white cashmere. Handcrafted in New Delhi.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600&family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ground: #2A1320;
+      --ground-dark: #1F0B17;
+      --gold: #D4A94A;
+      --gold-light: #E6BF62;
+      --ivory: #F0E4D3;
+      --wine-accent: #5E2238;
+      --border-gold: rgba(212, 169, 74, 0.24);
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Cinzel', serif;
+      --font-display: 'Outfit', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--ground);
+      color: var(--ivory);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.25s ease, opacity 0.25s ease;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .bg-ground { background-color: var(--ground); }
+    .text-gold { color: var(--gold); }
+    .text-ivory { color: var(--ivory); }
+    .gold-border-b { border-bottom: 1px solid var(--border-gold); }
+    .gold-border-t { border-top: 1px solid var(--border-gold); }
+
+    .bg-gold-bar {
+      background-color: #D4A94A !important;
+      color: #2A1320 !important;
+    }
+
+    .gold-pill-btn {
+      background-color: var(--gold);
+      color: var(--ground);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.95rem 2.4rem;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.25s ease, transform 0.2s ease;
+      cursor: pointer;
+      border: none;
+      text-align: center;
+    }
+    .gold-pill-btn:hover {
+      background-color: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+    .wine-pill-btn {
+      background-color: #5E2238;
+      color: #F0E4D3;
+      border: 1px solid rgba(212, 169, 74, 0.4);
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.95rem 2.4rem;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      text-align: center;
+    }
+    .wine-pill-btn:hover {
+      background-color: #722B45;
+      border-color: var(--gold);
+      transform: translateY(-1px);
+    }
+
+    .container-amenca {
+      width: 100%;
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .size-option {
+      border: 1px solid var(--border-gold);
+      background: rgba(31, 11, 23, 0.5);
+      color: var(--ivory);
+      padding: 10px 18px;
+      border-radius: 9999px;
+      cursor: pointer;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+    }
+    .size-option.active, .size-option:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(212, 169, 74, 0.12);
+    }
+
+    details {
+      border-bottom: 1px solid var(--border-gold);
+      padding: 18px 0;
+    }
+    summary {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ivory);
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    summary::after {
+      content: '+';
+      font-family: monospace;
+      font-size: 16px;
+      color: var(--gold);
+    }
+    details[open] summary::after { content: '—'; }
+    details p, details ul {
+      margin-top: 12px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.75);
+      line-height: 1.8;
+    }
+
+    dialog#MobileMenu {
+      position: fixed;
+      inset: 0;
+      margin: 0;
+      padding: 0;
+      height: 100dvh;
+      width: min(88vw, 380px);
+      background-color: #2A1320;
+      color: #F0E4D3;
+      border: none;
+      border-right: 1px solid rgba(212, 169, 74, 0.25);
+      z-index: 9999;
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    dialog#MobileMenu.open { transform: translateX(0); display: block; }
+    dialog#MobileMenu::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); }
+
+    /* Header Navigation & Responsive Rules */
+    .header-hamburger-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      color: #F0E4D3;
+      cursor: pointer;
+      padding: 0;
+    }
+    .desktop-header-nav {
+      display: none;
+      align-items: center;
+      gap: 32px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+    }
+    .header-nav-link {
+      color: rgba(240, 228, 211, 0.85);
+      transition: color 0.25s ease;
+      position: relative;
+    }
+    .header-nav-link:hover, .header-nav-link.active {
+      color: var(--gold);
+    }
+    .header-nav-link.active::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--gold);
+    }
+    @media (min-width: 900px) {
+      .header-hamburger-btn {
+        display: none !important;
+      }
+      .desktop-header-nav {
+        display: flex !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-ground text-ivory">
+
+  <aside class="w-full bg-gold-bar text-[13px] sm:text-base tracking-[0.14em] sm:tracking-[0.22em] leading-snug py-3 px-4 text-center font-semibold uppercase border-b border-[#3A1D2D]/20 z-50">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap;">
+      <a href="product-discovery-set.html" style="color: #2A1320;">THE DISCOVERY SET: ALL FOUR FRAGRANCES IN 25 ML</a>
+      <span style="opacity: 0.4;">|</span>
+      <a href="shop.html" style="color: #2A1320;">FESTIVE OFFER: 50% OFF SITEWIDE + FREE EXPRESS SHIPPING</a>
+    </div>
+  </aside>
+
+  <header class="w-full bg-ground gold-border-b sticky top-0 z-50">
+    <div class="container-amenca" style="height: 80px; display: flex; align-items: center; justify-content: space-between; position: relative;">
+      
+      <!-- Mobile Menu Hamburger Button -->
+      <button type="button" aria-label="Open menu" onclick="toggleMenu(true)" class="header-hamburger-btn">
+        <svg style="width: 24px; height: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></svg>
+      </button>
+
+      <!-- Center Brand Logo -->
+      <a href="index.html" style="display: flex; align-items: center; gap: 12px; transition: opacity 0.25s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+        <img src="Logo.jpeg" alt="YOJAKI DE LUXE" style="height: 56px; width: auto; object-fit: contain;">
+      </a>
+
+      <!-- Desktop Primary Navigation -->
+      <nav class="desktop-header-nav">
+        <a href="index.html" class="header-nav-link">Home</a>
+        <a href="shop.html" class="header-nav-link active">Shop</a>
+        <a href="product-discovery-set.html" class="header-nav-link">Discovery Set</a>
+        <a href="about.html" class="header-nav-link">Our Atelier</a>
+        <a href="contact.html" class="header-nav-link">Contact</a>
+      </nav>
+
+      <!-- Right Action Icons -->
+      <div style="display: flex; align-items: center; gap: 18px; color: #F0E4D3;">
+        <a href="shop.html" aria-label="Search Collection" style="background: none; border: none; cursor: pointer; color: inherit; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
+          <svg style="width: 22px; height: 22px;" fill="none" stroke="currentColor" stroke-width="1.25" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+        </a>
+        <a href="cart.html" data-open-cart aria-label="Shopping Cart" style="display: flex; align-items: center; gap: 6px; cursor: pointer; color: inherit;">
+          <svg style="width: 22px; height: 22px;" fill="none" stroke="currentColor" stroke-width="1.25" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.188-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+          <span style="font-size: 12px; letter-spacing: 0.1em; font-family: monospace; color: #D4A94A;">(<span class="cart-count-badge">0</span>)</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <dialog id="MobileMenu">
+    <div style="display: flex; height: 100%; flex-direction: column; overflow-y: auto; padding: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid rgba(212, 169, 74, 0.2);">
+        <a href="index.html" onclick="toggleMenu(false)">
+          <img src="Logo.jpeg" alt="YOJAKI" style="height: 50px;">
+        </a>
+        <button type="button" aria-label="Close menu" onclick="toggleMenu(false)" style="background: none; border: none; cursor: pointer; color: #F0E4D3; font-size: 24px;">✕</button>
+      </div>
+      <nav style="margin-top: 24px; display: flex; flex-direction: column;">
+        <a href="index.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Home</span> →</a>
+        <a href="shop.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #D4A94A; display: flex; justify-content: space-between;"><span>Shop Collection</span> →</a>
+        <a href="product-discovery-set.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Discovery Coffret</span> →</a>
+        <a href="about.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Our Atelier</span> →</a>
+        <a href="contact.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Contact Concierge</span> →</a>
+        <a href="cart.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #D4A94A; display: flex; justify-content: space-between;"><span>Shopping Bag</span> →</a>
+      </nav>
+
+      <div style="margin-top: auto; padding-top: 30px;">
+        <a href="shop.html" onclick="toggleMenu(false)" class="gold-pill-btn" style="width: 100%; text-align: center;">DISCOVER THE COLLECTION</a>
+      </div>
+    </div>
+  </dialog>
+
+  <div style="background: rgba(31, 11, 23, 0.4); padding: 16px 20px; border-bottom: 1px solid var(--border-gold);">
+    <div class="container-amenca" style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(240, 228, 211, 0.6); display: flex; align-items: center; gap: 8px;">
+      <a href="index.html" onmouseover="this.style.color='#D4A94A'" onmouseout="this.style.color='rgba(240, 228, 211, 0.6)'">Home</a>
+      <span>/</span>
+      <a href="shop.html" onmouseover="this.style.color='#D4A94A'" onmouseout="this.style.color='rgba(240, 228, 211, 0.6)'">Shop</a>
+      <span>/</span>
+      <span style="color: #D4A94A;">ROSE FLORA Extrait de Parfum</span>
+    </div>
+  </div>
+
+  <main style="padding: 60px 20px 100px 20px;">
+    <div class="container-amenca">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 60px; align-items: start;">
+        
+        <div>
+          <div style="position: relative; border: 1px solid var(--border-gold); border-radius: 8px; overflow: hidden; background: #0A0408; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 25px 60px rgba(0,0,0,0.85);">
+            <img src="bg-rose-flora.jpg" alt="Parisian Rose Garden" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) blur(2px);">
+            <div style="position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 30%, rgba(42, 19, 32, 0.8) 100%);"></div>
+
+            <img id="main-flacon-img" src="Product 2.jpeg" alt="ROSE FLORA Flacon" style="position: relative; z-index: 10; max-height: 82%; max-width: 82%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.95);">
+            
+            <div style="position: absolute; bottom: 16px; left: 16px; z-index: 20; background: rgba(42, 19, 32, 0.9); border: 1px solid var(--border-gold); padding: 4px 12px; border-radius: 9999px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);">
+              ✦ 60 DAYS COLD MACERATED
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 14px; margin-top: 20px;">
+            <button onclick="document.getElementById('main-flacon-img').src='Product 2.jpeg'" style="width: 80px; height: 80px; border: 2px solid var(--gold); border-radius: 6px; overflow: hidden; background: #000; padding: 4px; cursor: pointer;">
+              <img src="Product 2.jpeg" alt="Angle 1" style="width: 100%; height: 100%; object-fit: contain;">
+            </button>
+            <button onclick="document.getElementById('main-flacon-img').src='Logo.jpeg'" style="width: 80px; height: 80px; border: 1px solid var(--border-gold); border-radius: 6px; overflow: hidden; background: #000; padding: 4px; cursor: pointer;">
+              <img src="Logo.jpeg" alt="Atelier Crest" style="width: 100%; height: 100%; object-fit: contain;">
+            </button>
+            <button onclick="document.getElementById('main-flacon-img').src='bg-rose-flora.jpg'" style="width: 80px; height: 80px; border: 1px solid var(--border-gold); border-radius: 6px; overflow: hidden; background: #000; padding: 4px; cursor: pointer;">
+              <img src="bg-rose-flora.jpg" alt="Rose Alley" style="width: 100%; height: 100%; object-fit: cover;">
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
+            <span style="font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600;">ROMANTIC FLORAL · EXTRAIT</span>
+            <div style="font-size: 11px; letter-spacing: 0.15em; color: var(--gold);">
+              ★★★★★ <span style="color: rgba(240, 228, 211, 0.6);">(129 Connoisseurs)</span>
+            </div>
+          </div>
+
+          <h1 style="font-family: var(--font-serif); font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); line-height: 1.1; margin-bottom: 12px;">
+            ROSE FLORA
+          </h1>
+          <p style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(240, 228, 211, 0.85); margin-bottom: 24px;">
+            Damask Rose · Velvet French Peony · White Cashmere · Bourbon Vanilla
+          </p>
+
+          <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border-gold);">
+            <span id="pdp-price" style="font-size: 28px; font-weight: 600; color: var(--gold);">₹2,199</span>
+            <span id="pdp-old-price" style="font-size: 16px; text-decoration: line-through; color: rgba(240, 228, 211, 0.4);">₹4,399</span>
+            <span style="background: #D4A94A; color: #2A1320; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px;">
+              50% ATELIER SAVING
+            </span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; background: rgba(31, 11, 23, 0.6); padding: 18px; border: 1px solid var(--border-gold); border-radius: 6px;">
+            <div>
+              <div style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240, 228, 211, 0.6); margin-bottom: 4px;">Concentration</div>
+              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600;">28% Extrait</div>
+            </div>
+            <div>
+              <div style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240, 228, 211, 0.6); margin-bottom: 4px;">Longevity</div>
+              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600;">14+ Hours</div>
+            </div>
+            <div>
+              <div style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240, 228, 211, 0.6); margin-bottom: 4px;">Sillage</div>
+              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600;">Intimate Velvet</div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 28px;">
+            <div style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(240, 228, 211, 0.7); margin-bottom: 12px;">SELECT FLACON PRESENTATION:</div>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+              <button class="size-option active" onclick="selectSize(50, 2199, 4399, '50 ML', this)">50 ML (Standard)</button>
+              <button class="size-option" onclick="selectSize(100, 3799, 7599, '100 ML Duo', this)">100 ML (Atelier Duo)</button>
+              <button class="size-option" onclick="selectSize(25, 1299, 1999, '25 ML Travel', this)">25 ML (Travel Size)</button>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 34px;">
+            <div style="display: flex; gap: 14px; align-items: center;">
+              <div style="display: inline-flex; align-items: center; border: 1px solid var(--border-gold); border-radius: 9999px; padding: 6px 14px; gap: 14px; background: rgba(31, 11, 23, 0.7);">
+                <button onclick="adjustQty(-1)" style="background:none;border:none;color:var(--ivory);font-size:16px;cursor:pointer;">-</button>
+                <span id="pdp-qty" style="font-family:monospace;font-size:13px;min-width:18px;text-align:center;">1</span>
+                <button onclick="adjustQty(1)" style="background:none;border:none;color:var(--ivory);font-size:16px;cursor:pointer;">+</button>
+              </div>
+
+              <button onclick="handleAddToCart()" class="gold-pill-btn" style="flex: 1; padding: 0.95rem 1.6rem;">
+                ADD TO SHOPPING BAG
+              </button>
+            </div>
+
+            <button onclick="handleBuyNow()" class="wine-pill-btn" style="width: 100%;">
+              EXPRESS CHECKOUT WITH UPI / CARD →
+            </button>
+          </div>
+
+          <div style="padding: 14px 18px; border: 1px solid rgba(212, 169, 74, 0.2); border-radius: 6px; background: rgba(212, 169, 74, 0.05); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 30px;">
+            ✦ COMPLIMENTARY 48H EXPRESS AIR DISPATCH WITH GOLD WAX SEALED CERTIFICATE
+          </div>
+
+          <div style="border-top: 1px solid var(--border-gold);">
+            <details open>
+              <summary>OLFACTORY PYRAMID & NOTES</summary>
+              <ul>
+                <li><strong>TOP:</strong> French Peony, Bulgarian Damask Rose, Italian Mandarin</li>
+                <li><strong>HEART:</strong> White Lily of the Valley, Grasse Rose Centifolia, Iris Butter</li>
+                <li><strong>BASE:</strong> Bourbon Vanilla, White Cashmere Wood, Warm Ambergris</li>
+              </ul>
+            </details>
+            <details>
+              <summary>THE 60-DAY COLD MACERATION PROCESS</summary>
+              <p>Fresh petals are distilled in early morning harvest and cold-matured for 60 days to yield a velvety, creamy floral note free of sharp alcoholic edges.</p>
+            </details>
+            <details>
+              <summary>HOW TO WEAR</summary>
+              <p>Ideal for romantic evenings, formal galas, and intimate gatherings. Misting on clothing delivers luxurious cashmere sillage lasting up to 24 hours.</p>
+            </details>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="w-full bg-ground text-ivory gold-border-t" style="padding: 80px 20px 40px 20px;">
+    <div class="container-amenca">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; padding-bottom: 60px; border-bottom: 1px solid var(--border-gold);">
+        <div>
+          <img src="Logo.jpeg" alt="YOJAKI DE LUXE" style="height: 72px; width: auto; margin-bottom: 18px;">
+          <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: rgba(240, 228, 211, 0.7); line-height: 1.8;">
+            Artisanal Haute Parfumerie from New Delhi, India. Hand-bottled, cold-macerated, and meticulously composed.
+          </p>
+        </div>
+        <div>
+          <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.35em; color: var(--gold); font-weight: 500; margin-bottom: 16px;">NAVIGATION</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: rgba(240, 228, 211, 0.75);">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">The Collection</a></li>
+            <li><a href="product-discovery-set.html">Discovery Coffret</a></li>
+            <li><a href="about.html">Our Atelier</a></li>
+            <li><a href="cart.html">Shopping Bag</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.35em; color: var(--gold); font-weight: 500; margin-bottom: 16px;">THE FLACONS</h4>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: rgba(240, 228, 211, 0.75);">
+            <li><a href="product-thander.html">THANDER (50 ML)</a></li>
+            <li><a href="product-haawas-ice.html">HAAWAS + ICE (50 ML)</a></li>
+            <li><a href="product-rose-flora.html">ROSE FLORA (50 ML)</a></li>
+            <li><a href="product-cool-water.html">COOL WATER (50 ML)</a></li>
+            <li><a href="product-discovery-set.html">THE DISCOVERY COFFRET</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.35em; color: var(--gold); font-weight: 500; margin-bottom: 16px;">ATELIER CONTACT</h4>
+          <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: rgba(240, 228, 211, 0.75); line-height: 1.8;">
+            Maison Yojaki Atelier<br>
+            Ashok Vihar, New Delhi, India<br>
+            Concierge: +91 8054917017<br>
+            Email: concierge@yojaki.com
+          </p>
+        </div>
+      </div>
+      <div style="padding-top: 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(240, 228, 211, 0.5);">
+        <div>© 2026 YOJAKI DE LUXE. ALL RIGHTS RESERVED.</div>
+        <div style="display: flex; gap: 12px;">
+          <span>UPI / GPay</span>
+          <span>·</span>
+          <span>Cards</span>
+          <span>·</span>
+          <span>Cash on Delivery</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="cart.js"></script>
+  <script>
+    let currentSize = '50 ML';
+    let currentPrice = 2199;
+    let currentOriginalPrice = 4399;
+    let currentQty = 1;
+
+    function toggleMenu(show) {
+      const menu = document.getElementById('MobileMenu');
+      if (show) menu.classList.add('open');
+      else menu.classList.remove('open');
+    }
+
+    function selectSize(vol, price, original, label, btn) {
+      document.querySelectorAll('.size-option').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentSize = label;
+      currentPrice = price;
+      currentOriginalPrice = original;
+      document.getElementById('pdp-price').textContent = formatINR(price);
+      document.getElementById('pdp-old-price').textContent = formatINR(original);
+    }
+
+    function adjustQty(delta) {
+      currentQty = Math.max(1, currentQty + delta);
+      document.getElementById('pdp-qty').textContent = currentQty;
+    }
+
+    function handleAddToCart() {
+      addToCart({
+        id: 'rose-flora-' + currentSize.toLowerCase().replace(/\s+/g, '-'),
+        name: 'ROSE FLORA (' + currentSize + ')',
+        subtitle: 'Parisian Damask Bloom',
+        price: currentPrice,
+        originalPrice: currentOriginalPrice,
+        size: currentSize,
+        image: 'Product 2.jpeg',
+        quantity: currentQty,
+        url: 'product-rose-flora.html'
+      });
+    }
+
+    function handleBuyNow() {
+      handleAddToCart();
+      setTimeout(() => {
+        window.location.href = 'checkout.html';
+      }, 350);
+    }
+  </script>
+</body>
+</html>
+
