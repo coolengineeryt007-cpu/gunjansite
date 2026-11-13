@@ -26,7 +26,7 @@ const INITIAL_DEMO_CART = [
     price: 1299,
     originalPrice: 1999,
     size: '4 x 25 ML',
-    image: 'Logo.jpeg',
+    image: 'Logo.png',
     quantity: 1,
     url: 'product-discovery-set.html'
   }

@@ -186,6 +186,95 @@
     dialog#MobileMenu::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); }
 
     /* Header Navigation & Responsive Rules */
+    .announcement-banner {
+      width: 100%;
+      background: linear-gradient(90deg, #C5983A 0%, #E6BF62 50%, #C5983A 100%);
+      color: #1F0B17;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 9px 12px;
+      text-align: center;
+      border-bottom: 1px solid rgba(42, 19, 32, 0.2);
+      position: relative;
+      z-index: 51;
+      overflow: hidden;
+    }
+    .announcement-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 100%;
+    }
+    .announcement-desktop {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .announcement-mobile {
+      display: none;
+    }
+    .announcement-link {
+      color: #1F0B17;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      display: inline-block;
+    }
+    .announcement-link:hover {
+      opacity: 0.8;
+      transform: translateY(-0.5px);
+    }
+    .announcement-dot {
+      font-size: 7px;
+      opacity: 0.6;
+    }
+
+    @media (max-width: 768px) {
+      .announcement-desktop {
+        display: none !important;
+      }
+      .announcement-mobile {
+        display: block !important;
+        font-size: 10px;
+        letter-spacing: 0.14em;
+      }
+    }
+
+    .site-header {
+      width: 100%;
+      background: rgba(31, 11, 23, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(212, 169, 74, 0.28);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(212, 169, 74, 0.12);
+    }
+    .site-header-inner {
+      height: 92px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .site-brand-logo {
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    }
+    .site-brand-logo:hover {
+      transform: scale(1.03);
+      opacity: 0.95;
+    }
+    .site-brand-logo img {
+      height: 74px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 12px rgba(212, 169, 74, 0.28));
+    }
+
     .header-hamburger-btn {
       display: flex;
       align-items: center;
@@ -197,31 +286,110 @@
       color: #F0E4D3;
       cursor: pointer;
       padding: 0;
+      border-radius: 50%;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
+    .header-hamburger-btn:hover {
+      color: var(--gold);
+      background: rgba(212, 169, 74, 0.1);
+    }
+
     .desktop-header-nav {
       display: none;
       align-items: center;
-      gap: 32px;
-      font-size: 11px;
+      gap: 36px;
+      font-size: 11.5px;
       text-transform: uppercase;
       letter-spacing: 0.28em;
     }
     .header-nav-link {
-      color: rgba(240, 228, 211, 0.85);
-      transition: color 0.25s ease;
+      color: rgba(240, 228, 211, 0.82);
+      transition: color 0.3s ease;
       position: relative;
+      padding: 8px 0;
+      font-weight: 400;
     }
-    .header-nav-link:hover, .header-nav-link.active {
-      color: var(--gold);
-    }
-    .header-nav-link.active::after {
+    .header-nav-link::after {
       content: '';
       position: absolute;
-      bottom: -4px;
-      left: 0;
+      bottom: 0;
+      left: 50%;
+      width: 0%;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, #D4A94A 20%, #E6BF62 50%, #D4A94A 80%, transparent);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(-50%);
+    }
+    .header-nav-link:hover {
+      color: #E6BF62;
+    }
+    .header-nav-link:hover::after, .header-nav-link.active::after {
       width: 100%;
-      height: 1px;
-      background: var(--gold);
+    }
+    .header-nav-link.active {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .header-actions-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #F0E4D3;
+    }
+    .header-action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      color: #F0E4D3;
+      transition: all 0.25s ease;
+      position: relative;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+    .header-action-btn:hover {
+      color: var(--gold);
+      background: rgba(212, 169, 74, 0.12);
+      transform: translateY(-1px);
+    }
+    .cart-count-badge {
+      position: absolute;
+      top: 4px;
+      right: 2px;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 4px;
+      border-radius: 9999px;
+      background: #D4A94A;
+      color: #1F0B17;
+      font-size: 10.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+      border: 1.5px solid #2A1320;
+    }
+
+    @media (max-width: 899px) {
+      .site-header-inner {
+        height: 74px;
+      }
+      .site-brand-logo img {
+        height: 52px;
+      }
+      .header-actions-wrap {
+        gap: 6px;
+      }
+      .header-action-btn {
+        width: 36px;
+        height: 36px;
+      }
     }
     @media (min-width: 900px) {
       .header-hamburger-btn {
@@ -235,25 +403,38 @@
 </head>
 <body class="bg-ground text-ivory">
 
-  <aside class="w-full bg-gold-bar text-[13px] sm:text-base tracking-[0.14em] sm:tracking-[0.22em] leading-snug py-3 px-4 text-center font-semibold uppercase border-b border-[#3A1D2D]/20 z-50">
-    <div style="display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap;">
-      <a href="product-discovery-set.html" style="color: #2A1320;">THE DISCOVERY SET: ALL FOUR FRAGRANCES IN 25 ML</a>
-      <span style="opacity: 0.4;">|</span>
-      <a href="shop.html" style="color: #2A1320;">FESTIVE OFFER: 50% OFF SITEWIDE + FREE EXPRESS SHIPPING</a>
+  
+
+    <!-- ==========================================================================
+       LUXURY MAISON ANNOUNCEMENT BAR
+       ========================================================================== -->
+  <aside class="announcement-banner">
+    <div class="announcement-inner">
+      <div class="announcement-desktop">
+        <a href="product-discovery-set.html" class="announcement-link">THE DISCOVERY SET: ALL FOUR FRAGRANCES IN 25 ML</a>
+        <span class="announcement-dot">◆</span>
+        <a href="shop.html" class="announcement-link">FESTIVE PRIVILEGE: 50% OFF SITEWIDE + FREE EXPRESS SHIPPING</a>
+      </div>
+      <div class="announcement-mobile">
+        <a href="shop.html" class="announcement-link">50% OFF SITEWIDE • FREE EXPRESS SHIPPING</a>
+      </div>
     </div>
   </aside>
 
-  <header class="w-full bg-ground gold-border-b sticky top-0 z-50">
-    <div class="container-amenca" style="height: 80px; display: flex; align-items: center; justify-content: space-between; position: relative;">
+  <!-- ==========================================================================
+       LUXURY MAISON HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container-amenca site-header-inner">
       
       <!-- Mobile Menu Hamburger Button -->
       <button type="button" aria-label="Open menu" onclick="toggleMenu(true)" class="header-hamburger-btn">
         <svg style="width: 24px; height: 24px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></svg>
       </button>
 
-      <!-- Center Brand Logo -->
-      <a href="index.html" style="display: flex; align-items: center; gap: 12px; transition: opacity 0.25s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
-        <img src="Logo.jpeg" alt="YOJAKI DE LUXE" style="height: 56px; width: auto; object-fit: contain;">
+      <!-- Center / Left Brand Logo with Transparent High-Res PNG -->
+      <a href="index.html" class="site-brand-logo" aria-label="YOJAKI DE LUXE Maison">
+        <img src="Logo.png" alt="YOJAKI DE LUXE">
       </a>
 
       <!-- Desktop Primary Navigation -->
@@ -265,14 +446,15 @@
         <a href="contact.html" class="header-nav-link">Contact</a>
       </nav>
 
-      <!-- Right Action Icons -->
-      <div style="display: flex; align-items: center; gap: 18px; color: #F0E4D3;">
-        <a href="shop.html" aria-label="Search Collection" style="background: none; border: none; cursor: pointer; color: inherit; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;">
-          <svg style="width: 22px; height: 22px;" fill="none" stroke="currentColor" stroke-width="1.25" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
+      <!-- Right Action Icons (Search & Cart Bag) -->
+      <div class="header-actions-wrap">
+        <a href="shop.html" aria-label="Search Collection" class="header-action-btn">
+          <svg style="width: 21px; height: 21px;" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
         </a>
-        <a href="cart.html" data-open-cart aria-label="Shopping Cart" style="display: flex; align-items: center; gap: 6px; cursor: pointer; color: inherit;">
-          <svg style="width: 22px; height: 22px;" fill="none" stroke="currentColor" stroke-width="1.25" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.188-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
-          <span style="font-size: 12px; letter-spacing: 0.1em; font-family: monospace; color: #D4A94A;">(<span class="cart-count-badge">0</span>)</span>
+        
+        <a href="cart.html" data-open-cart aria-label="Shopping Cart" class="header-action-btn header-cart-btn" style="position: relative;">
+          <svg style="width: 22px; height: 22px;" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.188-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+          <span class="cart-count-badge" id="amenca-cart-count">0</span>
         </a>
       </div>
     </div>
@@ -282,7 +464,7 @@
     <div style="display: flex; height: 100%; flex-direction: column; overflow-y: auto; padding: 24px;">
       <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid rgba(212, 169, 74, 0.2);">
         <a href="index.html" onclick="toggleMenu(false)">
-          <img src="Logo.jpeg" alt="YOJAKI" style="height: 50px;">
+          <img src="Logo.png" alt="YOJAKI" style="height: 60px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(212, 169, 74, 0.25));">
         </a>
         <button type="button" aria-label="Close menu" onclick="toggleMenu(false)" style="background: none; border: none; cursor: pointer; color: #F0E4D3; font-size: 24px;">✕</button>
       </div>
@@ -331,8 +513,8 @@
             <button onclick="document.getElementById('main-flacon-img').src='Product 3.jpeg'" style="width: 80px; height: 80px; border: 2px solid var(--gold); border-radius: 6px; overflow: hidden; background: #000; padding: 4px; cursor: pointer;">
               <img src="Product 3.jpeg" alt="Angle 1" style="width: 100%; height: 100%; object-fit: contain;">
             </button>
-            <button onclick="document.getElementById('main-flacon-img').src='Logo.jpeg'" style="width: 80px; height: 80px; border: 1px solid var(--border-gold); border-radius: 6px; overflow: hidden; background: #000; padding: 4px; cursor: pointer;">
-              <img src="Logo.jpeg" alt="Atelier Crest" style="width: 100%; height: 100%; object-fit: contain;">
+            <button onclick="document.getElementById('main-flacon-img').src='Logo.png'" style="width: 80px; height: 80px; border: 1px solid var(--border-gold); border-radius: 6px; overflow: hidden; background: #000; padding: 4px; cursor: pointer;">
+              <img src="Logo.png" alt="Atelier Crest" style="width: 100%; height: 100%; object-fit: contain;">
             </button>
             <button onclick="document.getElementById('main-flacon-img').src='bg-cool-water.jpg'" style="width: 80px; height: 80px; border: 1px solid var(--border-gold); border-radius: 6px; overflow: hidden; background: #000; padding: 4px; cursor: pointer;">
               <img src="bg-cool-water.jpg" alt="Ocean Shoreline" style="width: 100%; height: 100%; object-fit: cover;">
@@ -437,7 +619,7 @@
     <div class="container-amenca">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; padding-bottom: 60px; border-bottom: 1px solid var(--border-gold);">
         <div>
-          <img src="Logo.jpeg" alt="YOJAKI DE LUXE" style="height: 72px; width: auto; margin-bottom: 18px;">
+          <img src="Logo.png" alt="YOJAKI DE LUXE" style="height: 72px; width: auto; margin-bottom: 18px;">
           <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: rgba(240, 228, 211, 0.7); line-height: 1.8;">
             Artisanal Haute Parfumerie from New Delhi, India. Hand-bottled, cold-macerated, and meticulously composed.
           </p>
