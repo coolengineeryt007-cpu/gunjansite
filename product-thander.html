@@ -139,58 +139,784 @@
       padding-right: 20px;
     }
 
-    /* Size Selector Pill */
-    .size-option {
-      border: 1px solid var(--border-gold);
-      background: rgba(31, 11, 23, 0.5);
-      color: var(--ivory);
-      padding: 10px 18px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-size: 11px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      transition: all 0.25s ease;
+    /* ==========================================================================
+       HAUTE PARFUMERIE PDP STYLES
+       ========================================================================== */
+    .pdp-hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 60px;
+      align-items: start;
     }
-    .size-option.active, .size-option:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-      background: rgba(212, 169, 74, 0.12);
+    @media (max-width: 960px) {
+      .pdp-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
     }
 
-    /* Accordion */
-    details {
-      border-bottom: 1px solid var(--border-gold);
-      padding: 18px 0;
+    /* Main Flacon Vitrine Stage / Slider */
+    .pdp-stage-container {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: radial-gradient(circle at 50% 40%, rgba(94, 34, 56, 0.45) 0%, rgba(18, 7, 14, 0.98) 75%);
+      border: 1px solid rgba(212, 169, 74, 0.3);
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(212, 169, 74, 0.1);
+      user-select: none;
     }
-    summary {
-      font-family: var(--font-serif);
-      font-size: 13px;
+    .pdp-slider-track {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .pdp-slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.96);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.65s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .pdp-slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+      pointer-events: auto;
+      z-index: 5;
+    }
+    .pdp-stage-ambient {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.22;
+      filter: blur(2px);
+      mix-blend-mode: luminosity;
+      pointer-events: none;
+    }
+    .pdp-stage-halo {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(212, 169, 74, 0.15) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .pdp-stage-img {
+      position: relative;
+      z-index: 10;
+      max-height: 84%;
+      max-width: 84%;
+      object-fit: contain;
+      border-radius: 12px;
+      filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.85));
+      transition: transform 0.4s ease;
+    }
+    .pdp-stage-badge-top {
+      position: absolute;
+      top: 18px;
+      left: 18px;
+      z-index: 20;
+      background: rgba(31, 11, 23, 0.85);
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      padding: 5px 14px;
+      border-radius: 9999px;
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .pdp-stage-badge-bottom {
+      position: absolute;
+      bottom: 18px;
+      left: 18px;
+      z-index: 20;
+      background: rgba(31, 11, 23, 0.88);
+      border: 1px solid rgba(212, 169, 74, 0.3);
+      padding: 5px 14px;
+      border-radius: 9999px;
+      font-size: 9px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--ivory);
+      color: var(--gold);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .pdp-slide-caption {
+      position: absolute;
+      bottom: 20px;
+      left: 18px;
+      right: 18px;
+      z-index: 20;
+      background: rgba(31, 11, 23, 0.88);
+      border: 1px solid rgba(212, 169, 74, 0.3);
+      padding: 10px 16px;
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      text-align: left;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Slider Navigation Controls */
+    .pdp-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(31, 11, 23, 0.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      color: #F0E4D3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 25;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.45);
+      opacity: 0.88;
+    }
+    .pdp-nav-arrow svg {
+      width: 20px;
+      height: 20px;
+      color: #E6BF62;
+      transition: transform 0.2s ease;
+    }
+    .pdp-nav-arrow:hover {
+      opacity: 1;
+      background: rgba(94, 34, 56, 0.9);
+      border-color: #E6BF62;
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 0 20px rgba(212, 169, 74, 0.4);
+    }
+    .pdp-nav-prev { left: 14px; }
+    .pdp-nav-next { right: 14px; }
+    .pdp-nav-prev:hover svg { transform: translateX(-2px); }
+    .pdp-nav-next:hover svg { transform: translateX(2px); }
+
+    /* Slide Counter Pill */
+    .pdp-slide-counter {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 20;
+      background: rgba(31, 11, 23, 0.85);
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-family: monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: #E6BF62;
+      font-weight: 700;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .pdp-counter-curr { color: #FFFFFF; }
+    .pdp-counter-sep { opacity: 0.4; font-size: 10px; }
+    .pdp-counter-total { opacity: 0.7; }
+
+    /* Auto-Play Progress Bar */
+    .pdp-progress-track {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(212, 169, 74, 0.15);
+      z-index: 22;
+      overflow: hidden;
+    }
+    .pdp-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #C5983A 0%, #F5CE76 50%, #C5983A 100%);
+      box-shadow: 0 0 8px rgba(212, 169, 74, 0.6);
+      transition: width 0.08s linear;
+    }
+
+    /* Interactive Thumbnails */
+    .pdp-thumb-list {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .pdp-thumb-btn {
+      width: 86px;
+      height: 86px;
+      border-radius: 12px;
+      background: radial-gradient(circle, rgba(50, 20, 35, 0.8), rgba(18, 7, 14, 0.95));
+      border: 1.5px solid rgba(212, 169, 74, 0.25);
+      padding: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pdp-thumb-btn:hover {
+      border-color: rgba(212, 169, 74, 0.7);
+      transform: translateY(-2px);
+    }
+    .pdp-thumb-btn.active {
+      border-color: #E6BF62;
+      box-shadow: 0 0 16px rgba(212, 169, 74, 0.45);
+      transform: translateY(-2px);
+    }
+    .pdp-thumb-btn img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 6px;
+    }
+    .pdp-thumb-indicator {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #D4A94A;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .pdp-thumb-btn.active .pdp-thumb-indicator {
+      opacity: 1;
+    }
+
+    /* Accord Pills */
+    .pdp-accord-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .pdp-accord-tag {
+      background: rgba(212, 169, 74, 0.08);
+      border: 1px solid rgba(212, 169, 74, 0.28);
+      border-radius: 9999px;
+      padding: 4px 12px;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.85);
+    }
+
+    /* Price Row */
+    .pdp-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 480px) {
+      .pdp-price-row {
+        gap: 10px;
+        align-items: center;
+      }
+      .pdp-price-row #pdp-price {
+        font-size: 28px !important;
+      }
+    }
+
+    /* Olfactory Performance Spec Strip (3 Pillars) */
+    .pdp-spec-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 26px;
+    }
+    .pdp-spec-card {
+      background: rgba(31, 11, 23, 0.65);
+      border: 1px solid rgba(212, 169, 74, 0.22);
+      border-radius: 10px;
+      padding: 12px 14px;
+      text-align: center;
+      transition: border-color 0.3s ease;
+      min-width: 0;
+    }
+    .pdp-spec-card:hover {
+      border-color: rgba(212, 169, 74, 0.45);
+    }
+    .pdp-spec-title {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.55);
+      margin-bottom: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .pdp-spec-value {
+      font-family: var(--font-serif);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    @media (max-width: 600px) {
+      .pdp-spec-grid {
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+      .pdp-spec-card {
+        padding: 10px 4px;
+      }
+      .pdp-spec-title {
+        font-size: 8px;
+        letter-spacing: 0.12em;
+      }
+      .pdp-spec-value {
+        font-size: 10.5px;
+        letter-spacing: 0.06em;
+      }
+      .pdp-stage-badge-top {
+        top: 12px;
+        left: 12px;
+        font-size: 8px;
+        padding: 4px 10px;
+        letter-spacing: 0.16em;
+      }
+      .pdp-stage-badge-bottom {
+        bottom: 12px;
+        left: 12px;
+        font-size: 7.5px;
+        padding: 4px 10px;
+        letter-spacing: 0.14em;
+        max-width: calc(100% - 24px);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .pdp-thumb-list {
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .pdp-thumb-btn {
+        width: 72px;
+        height: 72px;
+      }
+      .pdp-nav-arrow {
+        width: 36px;
+        height: 36px;
+      }
+      .pdp-nav-arrow svg {
+        width: 16px;
+        height: 16px;
+      }
+      .pdp-nav-prev { left: 8px; }
+      .pdp-nav-next { right: 8px; }
+      .pdp-slide-counter {
+        top: 12px;
+        right: 12px;
+        font-size: 9.5px;
+        padding: 3px 9px;
+      }
+      .pdp-slide-caption {
+        bottom: 12px;
+        left: 10px;
+        right: 10px;
+        padding: 8px 12px;
+      }
+    }
+
+    /* Size Selector Cards */
+    .pdp-size-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 540px) {
+      .pdp-size-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+    .pdp-size-card {
+      position: relative;
+      background: rgba(31, 11, 23, 0.7);
+      border: 1.5px solid rgba(212, 169, 74, 0.25);
+      border-radius: 12px;
+      padding: 12px 14px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pdp-size-card:hover {
+      border-color: rgba(212, 169, 74, 0.6);
+      background: rgba(42, 19, 32, 0.9);
+      transform: translateY(-2px);
+    }
+    .pdp-size-card.active {
+      border-color: #E6BF62;
+      background: radial-gradient(circle at 50% 0%, rgba(94, 34, 56, 0.65) 0%, rgba(31, 11, 23, 0.95) 100%);
+      box-shadow: 0 4px 20px rgba(212, 169, 74, 0.22), inset 0 0 12px rgba(212, 169, 74, 0.12);
+    }
+    .pdp-size-tag {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: #FFFFFF;
+    }
+    .pdp-size-card.active .pdp-size-tag {
+      color: #F5CE76;
+    }
+    .pdp-size-label {
+      font-size: 9.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.6);
+    }
+    .pdp-size-price {
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #D4A94A;
+      margin-top: 2px;
+    }
+    .pdp-size-badge {
+      position: absolute;
+      top: -8px;
+      right: 10px;
+      background: linear-gradient(90deg, #C5983A, #F5CE76);
+      color: #1F0B17;
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 9999px;
+    }
+
+    /* Trust Reassurance Strip */
+    .pdp-trust-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+      padding: 16px 14px;
+      background: rgba(31, 11, 23, 0.55);
+      border: 1px solid rgba(212, 169, 74, 0.22);
+      border-radius: 12px;
+    }
+    @media (max-width: 640px) {
+      .pdp-trust-strip {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+    }
+    .pdp-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pdp-trust-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(212, 169, 74, 0.12);
+      border: 1px solid rgba(212, 169, 74, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #E6BF62;
+      flex-shrink: 0;
+      font-size: 13px;
+    }
+    .pdp-trust-text {
+      font-size: 9.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.75);
+      line-height: 1.45;
+    }
+    .pdp-trust-text strong {
+      color: #FFFFFF;
+      display: block;
+      font-weight: 600;
+    }
+
+    /* Sensory Accordions */
+    .pdp-accordion-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-top: 1px solid rgba(212, 169, 74, 0.25);
+      padding-top: 24px;
+    }
+    .pdp-accordion-card {
+      background: rgba(31, 11, 23, 0.5);
+      border: 1px solid rgba(212, 169, 74, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .pdp-accordion-card[open] {
+      border-color: rgba(212, 169, 74, 0.45);
+      background: rgba(42, 19, 32, 0.7);
+    }
+    .pdp-accordion-summary {
+      padding: 16px 20px;
+      font-family: var(--font-serif);
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #F0E4D3;
       cursor: pointer;
       list-style: none;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      transition: color 0.2s ease;
     }
-    summary::after {
-      content: '+';
-      font-family: monospace;
-      font-size: 16px;
-      color: var(--gold);
+    .pdp-accordion-summary::-webkit-details-marker {
+      display: none;
     }
-    details[open] summary::after {
-      content: '—';
+    .pdp-accordion-summary:hover {
+      color: #E6BF62;
     }
-    details p, details ul {
-      margin-top: 12px;
+    .pdp-accordion-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 169, 74, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      color: #D4A94A;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+    .pdp-accordion-card[open] .pdp-accordion-icon {
+      transform: rotate(45deg);
+      border-color: #E6BF62;
+      color: #FFFFFF;
+      background: rgba(212, 169, 74, 0.15);
+    }
+    .pdp-accordion-body {
+      padding: 0 20px 18px 20px;
+      font-size: 12px;
+      letter-spacing: 0.08em;
       color: rgba(240, 228, 211, 0.75);
       line-height: 1.8;
+      border-top: 1px solid rgba(212, 169, 74, 0.12);
+      margin-top: 4px;
+      padding-top: 14px;
+    }
+    .pdp-notes-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .pdp-notes-item {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .pdp-notes-tier {
+      font-family: var(--font-serif);
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+      min-width: 65px;
+    }
+    .pdp-notes-desc {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: rgba(240, 228, 211, 0.88);
+    }
+
+    
+    /* ==========================================================================
+       HAUTE PARFUMERIE COLLECTION CARDS (FOR CROSS-SELL)
+       ========================================================================== */
+    .product-card {
+      position: relative;
+      border-radius: 18px;
+      background: radial-gradient(circle at 50% 20%, rgba(42, 19, 32, 0.92) 0%, rgba(20, 8, 15, 0.96) 100%);
+      border: 1px solid rgba(212, 169, 74, 0.28);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(212, 169, 74, 0.08);
+      padding: 20px 18px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: #E6BF62;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(212, 169, 74, 0.28);
+    }
+    .product-card-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1.05;
+      border-radius: 14px;
+      background: radial-gradient(circle at 50% 40%, rgba(94, 34, 56, 0.4) 0%, rgba(18, 7, 14, 0.95) 75%);
+      border: 1px solid rgba(212, 169, 74, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      margin-bottom: 18px;
+      overflow: hidden;
+      box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.6);
+      transition: all 0.4s ease;
+    }
+    .product-card:hover .product-card-stage {
+      border-color: rgba(212, 169, 74, 0.6);
+      background: radial-gradient(circle at 50% 40%, rgba(120, 40, 70, 0.5) 0%, rgba(18, 7, 14, 0.98) 75%);
+    }
+    .product-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+      filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));
+    }
+    .product-card:hover .product-card-img {
+      transform: scale(1.05);
+      filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
+    }
+    .card-spec-label {
+      font-size: 9.5px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #D4A94A;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .card-title-link {
+      text-decoration: none;
+      display: inline-block;
+    }
+    .card-product-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      font-weight: 500;
+      margin-bottom: 8px;
+      transition: color 0.3s ease;
+    }
+    .product-card:hover .card-product-title {
+      color: #E6BF62;
+    }
+    .card-notes-text {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.68);
+      line-height: 1.55;
+      margin-bottom: 16px;
+      min-height: 34px;
+    }
+    .card-price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: flex-start;
+      padding-top: 14px;
+      border-top: 1px solid rgba(212, 169, 74, 0.2);
+      margin-bottom: 16px;
+      margin-top: auto;
+    }
+    .card-price-now {
+      font-family: monospace;
+      font-size: 19px;
+      font-weight: 700;
+      color: #D4A94A;
+      letter-spacing: 0.05em;
+    }
+    .card-action-btns {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+    }
+    .card-btn-details {
+      flex: 1;
+      background: transparent;
+      border: 1.5px solid rgba(212, 169, 74, 0.4);
+      color: #F0E4D3;
+      border-radius: 9999px;
+      padding: 8px 10px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+    }
+    .card-btn-details:hover {
+      background: rgba(212, 169, 74, 0.15);
+      border-color: #E6BF62;
+      color: #FFFFFF;
+    }
+    .card-btn-cart {
+      flex: 1.35;
+      background: linear-gradient(90deg, #C5983A 0%, #F5CE76 50%, #C5983A 100%);
+      border: none;
+      color: #1F0B17;
+      border-radius: 9999px;
+      padding: 9px 12px;
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .card-btn-cart:hover {
+      background: linear-gradient(90deg, #F5CE76 0%, #FFFFFF 50%, #F5CE76 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(212, 169, 74, 0.45);
     }
 
     /* Mobile Drawer */
@@ -275,13 +1001,14 @@
 
     .site-header {
       width: 100%;
-      background: rgba(31, 11, 23, 0.94);
+      background: #0E030B; /* Deep Obsidian Noir for high-contrast gold branding */
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       position: sticky;
       top: 0;
-      z-index: 50;
-      border-bottom: 1px solid rgba(212, 169, 74, 0.28);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(212, 169, 74, 0.35);
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(212, 169, 74, 0.12);
     }
     .site-header-inner {
@@ -293,19 +1020,24 @@
     }
 
     .site-brand-logo {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
-    }
-    .site-brand-logo:hover {
-      transform: scale(1.03);
-      opacity: 0.95;
+      text-decoration: none;
+      position: relative;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: radial-gradient(ellipse at center, rgba(212, 169, 74, 0.22) 0%, rgba(212, 169, 74, 0.05) 55%, transparent 75%);
     }
     .site-brand-logo img {
-      height: 74px;
+      height: 52px;
       width: auto;
       object-fit: contain;
-      filter: drop-shadow(0 2px 12px rgba(212, 169, 74, 0.28));
+      filter: drop-shadow(0 2px 10px rgba(245, 206, 118, 0.5)) brightness(1.12) contrast(1.06);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .site-brand-logo:hover img {
+      transform: scale(1.04);
+      filter: drop-shadow(0 4px 18px rgba(245, 206, 118, 0.75)) brightness(1.2);
     }
 
     .header-hamburger-btn {
@@ -432,6 +1164,219 @@
         display: flex !important;
       }
     }
+  
+    /* ==========================================================================
+       MODERN MINIMAL LUXURY FOOTER
+       ========================================================================== */
+    .amenca-luxury-footer {
+      position: relative;
+      background: radial-gradient(circle at 50% 0%, rgba(85, 28, 48, 0.35) 0%, rgba(16, 6, 12, 0.98) 75%);
+      border-top: 1px solid rgba(212, 169, 74, 0.28);
+      color: #F0E4D3;
+      padding: 52px 24px 0 24px;
+      overflow: hidden;
+    }
+    .footer-modern-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1.3fr;
+      gap: 50px;
+      max-width: 1180px;
+      margin: 0 auto;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .footer-modern-grid {
+        grid-template-columns: 1fr;
+        gap: 36px;
+      }
+    }
+    .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .footer-brand-logo {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 2px 10px rgba(212, 169, 74, 0.3));
+    }
+    .footer-brand-text {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.68);
+      line-height: 1.75;
+      margin-bottom: 18px;
+      max-width: 320px;
+    }
+    .footer-simple-concierge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: #E6BF62;
+      text-decoration: none;
+      padding: 6px 12px;
+      background: rgba(42, 19, 32, 0.55);
+      border: 1px solid rgba(212, 169, 74, 0.25);
+      border-radius: 6px;
+      transition: all 0.25s ease;
+    }
+    .footer-simple-concierge:hover {
+      border-color: #E6BF62;
+      background: rgba(212, 169, 74, 0.15);
+      color: #FFFFFF;
+    }
+    .footer-simple-concierge svg {
+      width: 14px;
+      height: 14px;
+      color: #D4A94A;
+      flex-shrink: 0;
+    }
+    .footer-col-header {
+      font-family: var(--font-serif, "Cinzel", Georgia, serif);
+      font-size: 12px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .footer-nav-simple {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-nav-simple a {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.72);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .footer-nav-simple a:hover {
+      color: #FFFFFF;
+      transform: translateX(4px);
+    }
+    .footer-nav-simple a::before {
+      content: '✦';
+      font-size: 7px;
+      color: #D4A94A;
+      opacity: 0.5;
+      transition: opacity 0.25s ease;
+    }
+    .footer-nav-simple a:hover::before {
+      opacity: 1;
+      color: #E6BF62;
+    }
+    .footer-contact-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .footer-contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .footer-contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .footer-contact-label {
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+    }
+    .footer-contact-val {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: rgba(240, 228, 211, 0.75);
+      line-height: 1.6;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .footer-contact-link:hover {
+      color: #FFFFFF;
+    }
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(212, 169, 74, 0.18);
+      padding: 22px 0;
+      margin-top: 48px;
+    }
+    .footer-bottom-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .footer-copyright {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      color: rgba(240, 228, 211, 0.55);
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+      .amenca-luxury-footer {
+        padding: 42px 18px 0 18px;
+        text-align: center;
+      }
+      .footer-modern-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
+      }
+      .footer-brand-col {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-brand-text {
+        margin: 0 auto 16px auto;
+      }
+      .footer-col-header {
+        margin-bottom: 14px;
+      }
+      .footer-nav-simple {
+        align-items: center;
+      }
+      .footer-contact-wrap {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-contact-item {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-bottom-bar {
+        margin-top: 32px;
+        padding: 18px 0;
+      }
+      .footer-bottom-inner {
+        justify-content: center;
+        text-align: center;
+      }
+      .footer-copyright {
+        font-size: 9.5px;
+        letter-spacing: 0.12em;
+      }
+    }
+
   </style>
 </head>
 <body class="bg-ground text-ivory">
@@ -443,8 +1388,6 @@
   <aside class="announcement-banner">
     <div class="announcement-inner">
       <div class="announcement-desktop">
-        <a href="product-discovery-set.html" class="announcement-link">THE DISCOVERY SET: ALL FOUR FRAGRANCES IN 25 ML</a>
-        <span class="announcement-dot">◆</span>
         <a href="shop.html" class="announcement-link">FESTIVE PRIVILEGE: 50% OFF SITEWIDE + FREE EXPRESS SHIPPING</a>
       </div>
       <div class="announcement-mobile">
@@ -473,16 +1416,12 @@
       <nav class="desktop-header-nav">
         <a href="index.html" class="header-nav-link">Home</a>
         <a href="shop.html" class="header-nav-link active">Shop</a>
-        <a href="product-discovery-set.html" class="header-nav-link">Discovery Set</a>
         <a href="about.html" class="header-nav-link">Our Atelier</a>
         <a href="contact.html" class="header-nav-link">Contact</a>
       </nav>
 
       <!-- Right Action Icons (Search & Cart Bag) -->
       <div class="header-actions-wrap">
-        <a href="shop.html" aria-label="Search Collection" class="header-action-btn">
-          <svg style="width: 21px; height: 21px;" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
-        </a>
         
         <a href="cart.html" data-open-cart aria-label="Shopping Cart" class="header-action-btn header-cart-btn" style="position: relative;">
           <svg style="width: 22px; height: 22px;" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.188-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
@@ -504,7 +1443,6 @@
       <nav style="margin-top: 24px; display: flex; flex-direction: column;">
         <a href="index.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Home</span> →</a>
         <a href="shop.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #D4A94A; display: flex; justify-content: space-between;"><span>Shop Collection</span> →</a>
-        <a href="product-discovery-set.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Discovery Coffret</span> →</a>
         <a href="about.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Our Atelier</span> →</a>
         <a href="contact.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Contact Concierge</span> →</a>
         <a href="cart.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #D4A94A; display: flex; justify-content: space-between;"><span>Shopping Bag</span> →</a>
@@ -532,239 +1470,334 @@
   <!-- ==========================================================================
        PRODUCT DETAIL HERO
        ========================================================================== -->
-  <main style="padding: 60px 20px 100px 20px;">
-    <div class="container-amenca">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 60px; align-items: start;">
+  <main style="padding: 50px 20px 90px 20px;">
+    <div class="container-amenca" style="max-width: 1280px; margin: 0 auto;">
+      <div class="pdp-hero-grid">
         
-        <!-- Left Column: Media Gallery -->
-        <div>
-          <!-- Main Contained Frame with Atmosphere Backdrop -->
-          <div style="position: relative; border: 1px solid var(--border-gold); border-radius: 8px; overflow: hidden; background: #0A0408; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; box-shadow: 0 25px 60px rgba(0,0,0,0.85);">
-            <!-- Custom Storm Ocean Ambient Background -->
-            <img src="bg-thander.jpg" alt="Thander Seascape" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4) blur(2px);">
-            <div style="position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 30%, rgba(42, 19, 32, 0.8) 100%);"></div>
-
-            <!-- Crisp Contained Foreground Flacon Plaque -->
-            <img id="main-flacon-img" src="Product 4.jpeg" alt="THANDER Flacon" style="position: relative; z-index: 10; max-height: 82%; max-width: 82%; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.95); transition: transform 0.3s ease;">
+        <!-- Left Column: Media Vitrine Gallery & Slider -->
+        <div class="pdp-slider-wrap" id="pdpSlider">
+          <!-- Main Vitrine Stage with Slider Track -->
+          <div class="pdp-stage-container" id="pdpSliderStage" onmouseenter="pausePdpSlider()" onmouseleave="resumePdpSlider()">
             
-            <!-- Quality Seal -->
-            <div style="position: absolute; bottom: 16px; left: 16px; z-index: 20; background: rgba(42, 19, 32, 0.9); border: 1px solid var(--border-gold); padding: 4px 12px; border-radius: 9999px; font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);">
-              ✦ 60 DAYS COLD MACERATED
+            <!-- Slides Track -->
+            <div class="pdp-slider-track" id="pdpSliderTrack">
+              
+              <!-- Slide 1: Primary Flacon View -->
+              <div class="pdp-slide active" data-index="0">
+                <img src="bg-thander.jpg" alt="Thander Seascape Atmosphere" class="pdp-stage-ambient">
+                <div class="pdp-stage-halo"></div>
+                <img id="main-flacon-img" src="Product 4.jpeg" alt="THANDER Flacon Presentation" class="pdp-stage-img">
+                
+              </div>
+
+              <!-- Slide 2: Olfactory Atmosphere Artwork -->
+              <div class="pdp-slide" data-index="1">
+                <img src="bg-thander.jpg" alt="Storm Seascape Olfactory Atmosphere" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: brightness(0.7) contrast(1.1); transition: transform 6s ease;">
+                <div style="position: absolute; inset: 0; background: radial-gradient(circle at center, transparent 30%, rgba(18, 7, 14, 0.85) 100%); pointer-events: none;"></div>
+                </div>
+
+              <!-- Slide 3: Maison Golden Crest & Seal -->
+              <div class="pdp-slide" data-index="2">
+                <div style="position: absolute; inset: 0; background: radial-gradient(circle at center, rgba(94, 34, 56, 0.45) 0%, rgba(18, 7, 14, 0.98) 75%);"></div>
+                <img src="Logo.png" alt="Maison Yojaki Golden Crest" class="pdp-stage-img" style="max-height: 68%; max-width: 68%; filter: drop-shadow(0 15px 35px rgba(212, 169, 74, 0.35));">
+                </div>
+
             </div>
+
+            <!-- Top Quality Badge (Persistent across slides) -->
+            
+
+            <!-- Floating Slide Counter (01 / 03) -->
+            <div class="pdp-slide-counter" id="pdpSlideCounter">
+              <span class="pdp-counter-curr" id="pdpCounterCurr">01</span>
+              <span class="pdp-counter-sep">/</span>
+              <span class="pdp-counter-total">03</span>
+            </div>
+
+            <!-- Prev & Next Arrow Controls -->
+            <button type="button" class="pdp-nav-arrow pdp-nav-prev" onclick="prevPdpSlide()" aria-label="Previous Slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button type="button" class="pdp-nav-arrow pdp-nav-next" onclick="nextPdpSlide()" aria-label="Next Slide">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+
+            <!-- Auto-Play Progress Bar -->
+            <div class="pdp-progress-track">
+              <div class="pdp-progress-bar" id="pdpProgressBar"></div>
+            </div>
+
           </div>
 
-          <!-- Thumbnails -->
-          <div style="display: flex; gap: 14px; margin-top: 20px;">
-            <button onclick="document.getElementById('main-flacon-img').src='Product 4.jpeg'" style="width: 80px; height: 80px; border: 2px solid var(--gold); border-radius: 6px; overflow: hidden; background: #000; padding: 4px; cursor: pointer;">
-              <img src="Product 4.jpeg" alt="Angle 1" style="width: 100%; height: 100%; object-fit: contain;">
+          <!-- Interactive Luxury Thumbnails -->
+          <div class="pdp-thumb-list" id="pdpThumbList">
+            <button type="button" class="pdp-thumb-btn active" onclick="goToPdpSlide(0)" aria-label="Slide 1 - Flacon Presentation">
+              <img src="Product 4.jpeg" alt="Flacon Front View">
+              <div class="pdp-thumb-indicator"></div>
             </button>
-            <button onclick="document.getElementById('main-flacon-img').src='Logo.png'" style="width: 80px; height: 80px; border: 1px solid var(--border-gold); border-radius: 6px; overflow: hidden; background: #000; padding: 4px; cursor: pointer;">
-              <img src="Logo.png" alt="Atelier Crest" style="width: 100%; height: 100%; object-fit: contain;">
+            <button type="button" class="pdp-thumb-btn" onclick="goToPdpSlide(1)" aria-label="Slide 2 - Seascape Atmosphere">
+              <img src="bg-thander.jpg" alt="Storm Seascape Atmosphere" style="object-fit: cover;">
+              <div class="pdp-thumb-indicator"></div>
             </button>
-            <button onclick="document.getElementById('main-flacon-img').src='bg-thander.jpg'" style="width: 80px; height: 80px; border: 1px solid var(--border-gold); border-radius: 6px; overflow: hidden; background: #000; padding: 4px; cursor: pointer;">
-              <img src="bg-thander.jpg" alt="Seascape" style="width: 100%; height: 100%; object-fit: cover;">
+            <button type="button" class="pdp-thumb-btn" onclick="goToPdpSlide(2)" aria-label="Slide 3 - Maison Crest">
+              <img src="Logo.png" alt="Maison Golden Crest">
+              <div class="pdp-thumb-indicator"></div>
             </button>
           </div>
         </div>
 
-        <!-- Right Column: Product Purchasing & Sensory Narrative -->
+                <!-- Right Column: Purchasing Console & Sensory Story -->
         <div>
-          <!-- Scent Category & Rating -->
-          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
-            <span style="font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600;">DARK MARINE · EXTRAIT</span>
-            <div style="font-size: 11px; letter-spacing: 0.15em; color: var(--gold);">
-              ★★★★★ <span style="color: rgba(240, 228, 211, 0.6);">(142 Connoisseurs)</span>
-            </div>
-          </div>
+          
 
-          <!-- Title -->
-          <h1 style="font-family: var(--font-serif); font-size: clamp(2rem, 3.8vw, 3rem); font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); line-height: 1.1; margin-bottom: 12px;">
+          <!-- Title & Olfactory Category -->
+          <h1 style="font-family: var(--font-serif); font-size: clamp(2.4rem, 4.2vw, 3.4rem); font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; line-height: 1.1; margin-bottom: 10px; background: linear-gradient(180deg, #FFFFFF 0%, #F5E5C9 35%, #D4A94A 80%, #B3862A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
             THANDER
           </h1>
-          <p style="font-size: 12px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(240, 228, 211, 0.85); margin-bottom: 24px;">
-            Stormy Woods · Crashing Sea Spray · Wet Ozone · Smoked Ambergris
+          <p style="font-size: 11.5px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(240, 228, 211, 0.78); margin-bottom: 18px;">
+            50 ML EXTRAIT DE PARFUM · ARTISANAL COLD-MACERATED FLACON
           </p>
 
-          <!-- Price & Discount Badge -->
-          <div style="display: flex; align-items: baseline; gap: 16px; margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid var(--border-gold);">
-            <span id="pdp-price" style="font-size: 28px; font-weight: 600; color: var(--gold);">₹2,499</span>
-            <span id="pdp-old-price" style="font-size: 16px; text-decoration: line-through; color: rgba(240, 228, 211, 0.4);">₹4,999</span>
-            <span style="background: #D4A94A; color: #2A1320; font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; padding: 4px 10px; border-radius: 2px;">
-              50% ATELIER SAVING
-            </span>
+          <!-- Olfactory Accord Tags -->
+          <div class="pdp-accord-strip">
+            <span class="pdp-accord-tag">Stormy Woods</span>
+            <span class="pdp-accord-tag">Crashing Sea Spray</span>
+            <span class="pdp-accord-tag">Wet Ozone</span>
+            <span class="pdp-accord-tag">Smoked Birch Tar</span>
+            <span class="pdp-accord-tag">Dark Ambergris</span>
           </div>
 
-          <!-- Olfactory Meters -->
-          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; background: rgba(31, 11, 23, 0.6); padding: 18px; border: 1px solid var(--border-gold); border-radius: 6px;">
-            <div>
-              <div style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240, 228, 211, 0.6); margin-bottom: 4px;">Concentration</div>
-              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600;">28% Extrait</div>
+          <!-- Price & Privilege Badge -->
+          <div class="pdp-price-row">
+            <span id="pdp-price" style="font-family: monospace; font-size: 32px; font-weight: 700; color: #D4A94A; letter-spacing: 0.04em;">₹2,499</span>
+            <span id="pdp-old-price" style="display: none;"></span>
+          </div>
+          <p style="font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(240, 228, 211, 0.55); margin-bottom: 24px;">
+            Taxes included. Complimentary insured express air shipping across India.
+          </p>
+
+          <!-- 3-Pillar Haute Parfumerie Performance Matrix -->
+          <div class="pdp-spec-grid">
+            <div class="pdp-spec-card">
+              <div class="pdp-spec-title">Concentration</div>
+              <div class="pdp-spec-value">28% Extrait</div>
             </div>
-            <div>
-              <div style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240, 228, 211, 0.6); margin-bottom: 4px;">Longevity</div>
-              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600;">14+ Hours</div>
+            <div class="pdp-spec-card">
+              <div class="pdp-spec-title">Longevity</div>
+              <div class="pdp-spec-value">14+ Hours</div>
             </div>
-            <div>
-              <div style="font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240, 228, 211, 0.6); margin-bottom: 4px;">Sillage</div>
-              <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); font-weight: 600;">Commanding</div>
+            <div class="pdp-spec-card">
+              <div class="pdp-spec-title">Sillage</div>
+              <div class="pdp-spec-value">Commanding</div>
             </div>
           </div>
 
-          <!-- Size Selector -->
+          <!-- Flacon Size Selector Cards -->
           <div style="margin-bottom: 28px;">
-            <div style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(240, 228, 211, 0.7); margin-bottom: 12px;">SELECT FLACON PRESENTATION:</div>
-            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-              <button class="size-option active" onclick="selectSize(50, 2499, 4999, '50 ML', this)">50 ML (Standard)</button>
-              <button class="size-option" onclick="selectSize(100, 4299, 8599, '100 ML Duo', this)">100 ML (Atelier Duo)</button>
-              <button class="size-option" onclick="selectSize(25, 1299, 1999, '25 ML Travel', this)">25 ML (Travel Size)</button>
+            <div style="font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(240, 228, 211, 0.7); margin-bottom: 12px; font-weight: 600;">
+              SELECT FLACON PRESENTATION:
+            </div>
+            <div class="pdp-size-cards">
+              <div class="pdp-size-card active" onclick="selectSize(50, 2499, 4999, '50 ML', this)">
+                <span class="pdp-size-tag">50 ML</span>
+                <span class="pdp-size-label">Standard Flacon</span>
+                <span class="pdp-size-price">₹2,499</span>
+              </div>
+              <div class="pdp-size-card" onclick="selectSize(100, 4299, 8599, '100 ML Duo', this)">
+                
+                <span class="pdp-size-tag">100 ML</span>
+                <span class="pdp-size-label">Atelier Duo (2x50ml)</span>
+                <span class="pdp-size-price">₹4,299</span>
+              </div>
+              <div class="pdp-size-card" onclick="selectSize(25, 1299, 1999, '25 ML Travel', this)">
+                <span class="pdp-size-tag">25 ML</span>
+                <span class="pdp-size-label">Travel Size</span>
+                <span class="pdp-size-price">₹1,299</span>
+              </div>
             </div>
           </div>
 
-          <!-- Quantity & Purchase Buttons -->
-          <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 34px;">
+          <!-- Quantity Stepper & CTAs -->
+          <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px;">
             <div style="display: flex; gap: 14px; align-items: center;">
-              <div style="display: inline-flex; align-items: center; border: 1px solid var(--border-gold); border-radius: 9999px; padding: 6px 14px; gap: 14px; background: rgba(31, 11, 23, 0.7);">
-                <button onclick="adjustQty(-1)" style="background:none;border:none;color:var(--ivory);font-size:16px;cursor:pointer;">-</button>
-                <span id="pdp-qty" style="font-family:monospace;font-size:13px;min-width:18px;text-align:center;">1</span>
-                <button onclick="adjustQty(1)" style="background:none;border:none;color:var(--ivory);font-size:16px;cursor:pointer;">+</button>
+              <!-- Stepper -->
+              <div style="display: inline-flex; align-items: center; border: 1.5px solid rgba(212, 169, 74, 0.35); border-radius: 9999px; padding: 7px 16px; gap: 16px; background: rgba(31, 11, 23, 0.85); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);">
+                <button type="button" onclick="adjustQty(-1)" aria-label="Decrease quantity" style="background: none; border: none; color: #F0E4D3; font-size: 16px; cursor: pointer; line-height: 1; padding: 2px;">-</button>
+                <span id="pdp-qty" style="font-family: monospace; font-size: 14px; font-weight: 700; min-width: 20px; text-align: center; color: #E6BF62;">1</span>
+                <button type="button" onclick="adjustQty(1)" aria-label="Increase quantity" style="background: none; border: none; color: #F0E4D3; font-size: 16px; cursor: pointer; line-height: 1; padding: 2px;">+</button>
               </div>
 
-              <button onclick="handleAddToCart()" class="gold-pill-btn" style="flex: 1; padding: 0.95rem 1.6rem;">
-                ADD TO SHOPPING BAG
+              <!-- Add to Bag Primary CTA -->
+              <button type="button" onclick="handleAddToCart()" class="gold-pill-btn" style="flex: 1; padding: 1.05rem 1.6rem; font-size: 0.78rem; letter-spacing: 0.22em; gap: 10px; background: linear-gradient(90deg, #C5983A 0%, #F5CE76 50%, #C5983A 100%); color: #1F0B17; font-weight: 800; box-shadow: 0 4px 20px rgba(212, 169, 74, 0.35);">
+                <svg style="width: 17px; height: 17px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.188-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
+                <span>ADD TO SHOPPING BAG</span>
               </button>
             </div>
 
-            <button onclick="handleBuyNow()" class="wine-pill-btn" style="width: 100%;">
-              EXPRESS CHECKOUT WITH UPI / CARD →
-            </button>
+            
           </div>
 
-          <!-- Dispatch Note -->
-          <div style="padding: 14px 18px; border: 1px solid rgba(212, 169, 74, 0.2); border-radius: 6px; background: rgba(212, 169, 74, 0.05); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 30px;">
-            ✦ COMPLIMENTARY 48H EXPRESS AIR DISPATCH WITH GOLD WAX SEALED CERTIFICATE
+          <!-- Trust Reassurance Strip -->
+          <div class="pdp-trust-strip">
+            <div class="pdp-trust-item">
+              <div class="pdp-trust-icon">⚡</div>
+              <div class="pdp-trust-text">
+                <strong>48H AIR DISPATCH</strong>
+                Free Insured Delivery
+              </div>
+            </div>
+            <div class="pdp-trust-item">
+              <div class="pdp-trust-icon">🛡️</div>
+              <div class="pdp-trust-text">
+                <strong>WAX SEALED</strong>
+                Hand-Bottled in Delhi
+              </div>
+            </div>
+            <div class="pdp-trust-item">
+              <div class="pdp-trust-icon">🎁</div>
+              <div class="pdp-trust-text">
+                <strong>FREE SAMPLE</strong>
+                2ml Discovery Vial
+              </div>
+            </div>
           </div>
-
-          <!-- Sensory Accordions -->
-          <div style="border-top: 1px solid var(--border-gold);">
-            <details open>
-              <summary>OLFACTORY PYRAMID & NOTES</summary>
-              <ul>
-                <li><strong>TOP:</strong> Storm Ozone, Crashing Saline Sea Salt, Crushed Black Pepper</li>
-                <li><strong>HEART:</strong> Cold Wet Driftwood, Smoked Birch Tar, French Clary Sage</li>
-                <li><strong>BASE:</strong> Rare Ocean Ambergris, Indonesian Dark Patchouli, Atlas Cedarwood</li>
-              </ul>
-            </details>
-
-            <details>
-              <summary>THE 60-DAY COLD MACERATION PROCESS</summary>
-              <p>
-                Unlike mass commercial perfumery, THANDER is never heat-accelerated. The pure botanical extrait matures for 60 uninterrupted days in temperature-regulated sealed vessels in North West Delhi, India, creating a seamless, creamy integration between the violent sea spray and dense resinous woods.
-              </p>
-            </details>
-
-            <details>
-              <summary>HOW TO APPLY FOR 14+ HOUR PROJECTION</summary>
-              <p>
-                Extrait de Parfum possesses high oil density (28%). Mist directly onto clean, hydrated skin at the pulse points: clavicle, wrists, and behind the ears. Do not rub wrists together, which fractures the volatile top sea-ozone molecules.
-              </p>
-            </details>
-
-            <details>
-              <summary>ATELIER PACKAGING & 7-DAY GUARANTEE</summary>
-              <p>
-                Every flacon arrives in a heavy rigid wine-toned presentation box wrapped in black tissue and sealed with our gold monogram wax crest. Includes a complimentary 2ml sample to test first; if unsatisfied, return the unopened 50ml flacon within 7 days for a full refund.
-              </p>
-            </details>
-          </div>
-
         </div>
-
       </div>
     </div>
   </main>
 
   <!-- ==========================================================================
-       COMPLEMENTARY PAIRINGS (Cross-Selling)
+       COMPLEMENTARY PAIRINGS (Cross-Selling - NO WHITE BOXES!)
        ========================================================================== -->
-  <section class="gold-border-t" style="background: rgba(31, 11, 23, 0.5); padding: 80px 20px;">
-    <div class="container-amenca" style="text-align: center;">
-      <p style="font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px;">RECOMMENDED OLFACTORY HARMONY</p>
-      <h2 style="font-family: var(--font-serif); font-size: clamp(1.6rem, 3vw, 2.4rem); text-transform: uppercase; letter-spacing: 0.2em; color: var(--ivory); margin-bottom: 36px;">
+  <section class="gold-border-t" style="background: radial-gradient(circle at 50% 0%, rgba(94, 34, 56, 0.35) 0%, rgba(18, 7, 14, 0.98) 75%); padding: 85px 20px 95px 20px;">
+    <div class="container-amenca" style="max-width: 1240px; margin: 0 auto; text-align: center;">
+      
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(212, 169, 74, 0.12); border: 1px solid rgba(212, 169, 74, 0.35); border-radius: 9999px; padding: 5px 16px; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #E6BF62; font-weight: 600; margin-bottom: 14px;">
+        ✦ RECOMMENDED OLFACTORY HARMONIES ✦
+      </div>
+      <h2 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 3.2vw, 2.6rem); text-transform: uppercase; letter-spacing: 0.22em; color: #FFFFFF; margin-bottom: 44px;">
         Frequently Layered Creations
       </h2>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; max-width: 1100px; margin: 0 auto;">
+      <!-- 3-Column Luxury Pairings Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 28px; text-align: left;">
         
-        <div style="background: rgba(42, 19, 32, 0.7); border: 1px solid var(--border-gold); padding: 20px; border-radius: 6px;">
-          <a href="product-haawas-ice.html" style="display: block; aspect-ratio: 1; background: #FAF7F2; border-radius: 4px; padding: 16px; margin-bottom: 16px;">
-            <img src="product 1.jpeg" alt="HAAWAS + ICE" style="width: 100%; height: 100%; object-fit: contain;">
+        <!-- Pair 1: HAAWAS + ICE -->
+        <article class="product-card">
+          <a href="product-haawas-ice.html" class="product-card-stage" aria-label="HAAWAS + ICE Flacon">
+            <img src="product 1.jpeg" alt="HAAWAS + ICE Extrait Flacon" class="product-card-img">
           </a>
-          <h3 style="font-family: var(--font-serif); font-size: 15px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); margin-bottom: 6px;">HAAWAS + ICE</h3>
-          <div style="font-size: 13px; font-weight: 600; color: var(--gold); margin-bottom: 14px;">₹2,299</div>
-          <button onclick="addToCart({ id: 'haawas-ice-50ml', name: 'HAAWAS + ICE', price: 2299, size: '50 ML', image: 'product 1.jpeg', url: 'product-haawas-ice.html' })" class="gold-pill-btn" style="padding: 0.55rem 1.4rem; font-size: 9px; width: 100%;">ADD TO BAG</button>
-        </div>
+          <span class="card-spec-label">GLACIAL CITRUS AQUATIC</span>
+          <a href="product-haawas-ice.html" class="card-title-link">
+            <h3 class="card-product-title">HAAWAS + ICE</h3>
+          </a>
+          <p class="card-notes-text">Sub-Zero Italian Lemon · Glacial Lake Waters · Arctic Spearmint · Driftwood</p>
+          <div class="card-price-row">
+            <span class="card-price-now">₹2,299</span>
+          </div>
+          <div class="card-action-btns">
+            <a href="product-haawas-ice.html" class="card-btn-details">DETAILS</a>
+            <button type="button" onclick="addToCart({ id: 'haawas-ice-50ml', name: 'HAAWAS + ICE', price: 2299, size: '50 ML', image: 'product 1.jpeg', url: 'product-haawas-ice.html' })" class="card-btn-cart">ADD TO BAG</button>
+          </div>
+        </article>
 
-        <div style="background: rgba(42, 19, 32, 0.7); border: 1px solid var(--border-gold); padding: 20px; border-radius: 6px;">
-          <a href="product-discovery-set.html" style="display: block; aspect-ratio: 1; background: #FAF7F2; border-radius: 4px; padding: 16px; margin-bottom: 16px;">
-            <img src="Logo.png" alt="Discovery Set" style="width: 100%; height: 100%; object-fit: contain;">
+        <!-- Pair 2: ROSE FLORA -->
+        <article class="product-card">
+          <a href="product-rose-flora.html" class="product-card-stage" aria-label="ROSE FLORA Flacon">
+            <img src="Product 2.jpeg" alt="ROSE FLORA Extrait Flacon" class="product-card-img">
           </a>
-          <h3 style="font-family: var(--font-serif); font-size: 15px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); margin-bottom: 6px;">THE DISCOVERY COFFRET</h3>
-          <div style="font-size: 13px; font-weight: 600; color: var(--gold); margin-bottom: 14px;">₹1,299</div>
-          <button onclick="addToCart({ id: 'discovery-set', name: 'THE DISCOVERY SET', price: 1299, size: '4 x 25 ML', image: 'Logo.png', url: 'product-discovery-set.html' })" class="gold-pill-btn" style="padding: 0.55rem 1.4rem; font-size: 9px; width: 100%;">ADD TO BAG</button>
-        </div>
+          <span class="card-spec-label">FRENCH FLORAL EXTRAIT</span>
+          <a href="product-rose-flora.html" class="card-title-link">
+            <h3 class="card-product-title">ROSE FLORA</h3>
+          </a>
+          <p class="card-notes-text">Damask Rose · Velvet Peony · White Tea · Bourbon Vanilla · Cashmere</p>
+          <div class="card-price-row">
+            <span class="card-price-now">₹2,199</span>
+          </div>
+          <div class="card-action-btns">
+            <a href="product-rose-flora.html" class="card-btn-details">DETAILS</a>
+            <button type="button" onclick="addToCart({ id: 'rose-flora-50ml', name: 'ROSE FLORA', price: 2199, size: '50 ML', image: 'Product 2.jpeg', url: 'product-rose-flora.html' })" class="card-btn-cart">ADD TO BAG</button>
+          </div>
+        </article>
+
+        <!-- Pair 3: COOL WATER -->
+        <article class="product-card">
+          <a href="product-cool-water.html" class="product-card-stage" aria-label="COOL WATER Flacon">
+            <img src="Product 3.jpeg" alt="COOL WATER Extrait Flacon" class="product-card-img">
+          </a>
+          <span class="card-spec-label">SOLAR OCEAN AQUATIC</span>
+          <a href="product-cool-water.html" class="card-title-link">
+            <h3 class="card-product-title">COOL WATER</h3>
+          </a>
+          <p class="card-notes-text">Solar Sea Salt · Blue Lotus · Sunlit Coconut Sand · Clean Ocean Amber</p>
+          <div class="card-price-row">
+            <span class="card-price-now">₹1,999</span>
+          </div>
+          <div class="card-action-btns">
+            <a href="product-cool-water.html" class="card-btn-details">DETAILS</a>
+            <button type="button" onclick="addToCart({ id: 'cool-water-50ml', name: 'COOL WATER', price: 1999, size: '50 ML', image: 'Product 3.jpeg', url: 'product-cool-water.html' })" class="card-btn-cart">ADD TO BAG</button>
+          </div>
+        </article>
 
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="w-full bg-ground text-ivory gold-border-t" style="padding: 80px 20px 40px 20px;">
-    <div class="container-amenca">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; padding-bottom: 60px; border-bottom: 1px solid var(--border-gold);">
-        <div>
-          <img src="Logo.png" alt="YOJAKI DE LUXE" style="height: 72px; width: auto; margin-bottom: 18px;">
-          <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: rgba(240, 228, 211, 0.7); line-height: 1.8;">
-            Artisanal Haute Parfumerie from New Delhi, India. Hand-bottled, cold-macerated, and meticulously composed.
-          </p>
-        </div>
-        <div>
-          <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.35em; color: var(--gold); font-weight: 500; margin-bottom: 16px;">NAVIGATION</h4>
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: rgba(240, 228, 211, 0.75);">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="shop.html">The Collection</a></li>
-            <li><a href="product-discovery-set.html">Discovery Coffret</a></li>
-            <li><a href="about.html">Our Atelier</a></li>
-            <li><a href="cart.html">Shopping Bag</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.35em; color: var(--gold); font-weight: 500; margin-bottom: 16px;">THE FLACONS</h4>
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: rgba(240, 228, 211, 0.75);">
-            <li><a href="product-thander.html">THANDER (50 ML)</a></li>
-            <li><a href="product-haawas-ice.html">HAAWAS + ICE (50 ML)</a></li>
-            <li><a href="product-rose-flora.html">ROSE FLORA (50 ML)</a></li>
-            <li><a href="product-cool-water.html">COOL WATER (50 ML)</a></li>
-            <li><a href="product-discovery-set.html">THE DISCOVERY COFFRET</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.35em; color: var(--gold); font-weight: 500; margin-bottom: 16px;">ATELIER CONTACT</h4>
-          <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: rgba(240, 228, 211, 0.75); line-height: 1.8;">
-            Maison Yojaki Atelier<br>
-            Ashok Vihar, New Delhi, India<br>
-            Concierge: +91 8054917017<br>
-            Email: concierge@yojaki.com
-          </p>
+  <!-- ==========================================================================
+       MODERN MINIMAL LUXURY FOOTER
+       ========================================================================== -->
+  <footer id="footer" class="amenca-luxury-footer">
+    <div class="footer-modern-grid">
+      <!-- Col 1: Brand Identity -->
+      <div class="footer-brand-col">
+        <a href="index.html" aria-label="Maison Yojaki Home">
+          <img src="Logo.png" alt="YOJAKI DE LUXE" class="footer-brand-logo">
+        </a>
+        <p class="footer-brand-text">
+          Artisanal Haute Parfumerie · Hand-bottled &amp; cold-macerated in New Delhi, India.
+        </p>
+        <a href="https://wa.me/918054917017" target="_blank" rel="noopener" class="footer-simple-concierge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          <span>WhatsApp Concierge: +91 8054917017</span>
+        </a>
+      </div>
+
+      <!-- Col 2: Essential Links -->
+      <div>
+        <h4 class="footer-col-header">EXPLORE</h4>
+        <ul class="footer-nav-simple">
+          <li><a href="shop.html">All Fragrances</a></li>
+          <li><a href="about.html">Our Atelier Story</a></li>
+          <li><a href="contact.html">Concierge &amp; Appointments</a></li>
+          <li><a href="cart.html">Shopping Bag</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Contact Us -->
+      <div class="footer-contact-wrap">
+        <h4 class="footer-col-header">CONTACT US</h4>
+        <div class="footer-contact-list">
+          <div class="footer-contact-item">
+            <span class="footer-contact-label">ATELIER LOCATION</span>
+            <span class="footer-contact-val">Ashok Vihar, North West Delhi, India · 110052</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="footer-contact-label">CONCIERGE &amp; WHATSAPP</span>
+            <a href="tel:+918054917017" class="footer-contact-val footer-contact-link">+91 8054917017</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="footer-contact-label">ATELIER EMAIL</span>
+            <a href="mailto:concierge@yojaki.com" class="footer-contact-val footer-contact-link">concierge@yojaki.com</a>
+          </div>
         </div>
       </div>
-      <div style="padding-top: 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(240, 228, 211, 0.5);">
-        <div>© 2026 YOJAKI DE LUXE. ALL RIGHTS RESERVED.</div>
-        <div style="display: flex; gap: 12px;">
-          <span>UPI / GPay</span>
-          <span>·</span>
-          <span>Cards</span>
-          <span>·</span>
-          <span>Cash on Delivery</span>
+    </div>
+
+    <!-- Sub-footer Bar -->
+    <div class="footer-bottom-bar">
+      <div class="footer-bottom-inner">
+        <div class="footer-copyright">
+          © 2026 YOJAKI HAUTE PARFUMERIE · ALL RIGHTS RESERVED.
         </div>
       </div>
     </div>
@@ -783,14 +1816,141 @@
       else menu.classList.remove('open');
     }
 
+    /* ==========================================================================
+       MODERN PDP PRODUCT SLIDER WITH AUTO-CHANGE & PROGRESS
+       ========================================================================== */
+    let currentSlideIndex = 0;
+    const autoPlayDuration = 4500; // 4.5 seconds per slide
+    let progressStartTime = 0;
+    let progressRaf = null;
+    let isSliderPaused = false;
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    function updateSlider(index) {
+      const slides = document.querySelectorAll('#pdpSliderTrack .pdp-slide');
+      const thumbs = document.querySelectorAll('#pdpThumbList .pdp-thumb-btn');
+      const counterCurr = document.getElementById('pdpCounterCurr');
+
+      if (!slides.length) return;
+
+      currentSlideIndex = (index + slides.length) % slides.length;
+
+      slides.forEach((s, i) => {
+        if (i === currentSlideIndex) {
+          s.classList.add('active');
+        } else {
+          s.classList.remove('active');
+        }
+      });
+
+      thumbs.forEach((t, i) => {
+        if (i === currentSlideIndex) {
+          t.classList.add('active');
+        } else {
+          t.classList.remove('active');
+        }
+      });
+
+      if (counterCurr) {
+        counterCurr.textContent = String(currentSlideIndex + 1).padStart(2, '0');
+      }
+
+      resetAutoPlayProgress();
+    }
+
+    function nextPdpSlide() {
+      updateSlider(currentSlideIndex + 1);
+    }
+
+    function prevPdpSlide() {
+      updateSlider(currentSlideIndex - 1);
+    }
+
+    function goToPdpSlide(index) {
+      updateSlider(index);
+    }
+
+    function resetAutoPlayProgress() {
+      cancelAnimationFrame(progressRaf);
+      const bar = document.getElementById('pdpProgressBar');
+      if (bar) bar.style.width = '0%';
+
+      if (!isSliderPaused) {
+        progressStartTime = performance.now();
+        runProgressBar();
+      }
+    }
+
+    function runProgressBar() {
+      const bar = document.getElementById('pdpProgressBar');
+      function step(now) {
+        if (isSliderPaused) return;
+        const elapsed = now - progressStartTime;
+        const pct = Math.min(100, (elapsed / autoPlayDuration) * 100);
+        if (bar) bar.style.width = pct + '%';
+
+        if (elapsed < autoPlayDuration) {
+          progressRaf = requestAnimationFrame(step);
+        } else {
+          if (bar) bar.style.width = '100%';
+          nextPdpSlide();
+        }
+      }
+      progressRaf = requestAnimationFrame(step);
+    }
+
+    function pausePdpSlider() {
+      isSliderPaused = true;
+      cancelAnimationFrame(progressRaf);
+    }
+
+    function resumePdpSlider() {
+      if (!isSliderPaused) return;
+      isSliderPaused = false;
+      progressStartTime = performance.now();
+      runProgressBar();
+    }
+
+    // Touch swipe support for mobile
+    const sliderStage = document.getElementById('pdpSliderStage');
+    if (sliderStage) {
+      sliderStage.addEventListener('touchstart', (e) => {
+        if (e.changedTouches && e.changedTouches.length) {
+          touchStartX = e.changedTouches[0].screenX;
+        }
+      }, { passive: true });
+
+      sliderStage.addEventListener('touchend', (e) => {
+        if (e.changedTouches && e.changedTouches.length) {
+          touchEndX = e.changedTouches[0].screenX;
+          const diff = touchEndX - touchStartX;
+          if (Math.abs(diff) > 40) {
+            if (diff < 0) nextPdpSlide();
+            else prevPdpSlide();
+          }
+        }
+      }, { passive: true });
+    }
+
+    // Initialize auto play
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', resetAutoPlayProgress);
+    } else {
+      resetAutoPlayProgress();
+    }
+
+    
+    
+
     function selectSize(vol, price, original, label, btn) {
-      document.querySelectorAll('.size-option').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.pdp-size-card').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       currentSize = label;
       currentPrice = price;
       currentOriginalPrice = original;
       document.getElementById('pdp-price').textContent = formatINR(price);
-      document.getElementById('pdp-old-price').textContent = formatINR(original);
+      const oldPriceEl = document.getElementById("pdp-old-price"); if (oldPriceEl) oldPriceEl.textContent = formatINR(original);
     }
 
     function adjustQty(delta) {

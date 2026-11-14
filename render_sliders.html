@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hero Slider 1920x650 Render</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1F0B17;
+      color: #F0E4D3;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow: hidden;
+      width: 1920px;
+      height: 650px;
+    }
+
+    .slide-canvas {
+      position: absolute;
+      inset: 0;
+      width: 1920px;
+      height: 650px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: #2A1320;
+      overflow: hidden;
+    }
+    .slide-canvas.active { display: flex; }
+
+    .slide-inner {
+      width: 100%;
+      max-width: 1600px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 10;
+    }
+
+    .bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.65) contrast(1.1);
+    }
+
+    .vignette-overlay {
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(90deg, rgba(20, 8, 15, 0.94) 0%, rgba(31, 11, 23, 0.78) 45%, rgba(20, 8, 15, 0.4) 75%, rgba(10, 4, 8, 0.88) 100%),
+        linear-gradient(180deg, rgba(31, 11, 23, 0.6) 0%, transparent 25%, transparent 75%, rgba(31, 11, 23, 0.8) 100%);
+      pointer-events: none;
+    }
+
+    .slide-left-content {
+      position: relative;
+      z-index: 10;
+      max-width: 980px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #D4A94A;
+      margin-bottom: 18px;
+    }
+    .eyebrow-logo {
+      height: 28px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(212, 169, 74, 0.5));
+    }
+
+    .headline {
+      font-family: 'Cinzel', serif;
+      font-size: 52px;
+      font-weight: 600;
+      line-height: 1.15;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F5E5C9 35%, #D4A94A 75%, #B3862A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 3px 15px rgba(0, 0, 0, 0.85));
+      margin-bottom: 18px;
+    }
+
+    .subhead {
+      font-size: 15px;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #F0E4D3;
+      opacity: 0.92;
+      line-height: 1.65;
+      margin-bottom: 28px;
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .gold-btn {
+      background: linear-gradient(90deg, #C5983A 0%, #E6BF62 50%, #C5983A 100%);
+      color: #1F0B17;
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 15px 38px;
+      border-radius: 9999px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 169, 74, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .outline-btn {
+      background: rgba(42, 19, 32, 0.5);
+      color: #F0E4D3;
+      border: 1px solid rgba(212, 169, 74, 0.5);
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 14px 32px;
+      border-radius: 9999px;
+      backdrop-filter: blur(8px);
+      text-decoration: none;
+    }
+
+    .badge-pill {
+      background: rgba(212, 169, 74, 0.15);
+      border: 1px solid rgba(212, 169, 74, 0.5);
+      color: #D4A94A;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .slide-right-visual {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Slide 1 visual: Grand glowing crest */
+    .grand-crest-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 520px;
+      height: 520px;
+    }
+    .grand-crest-glow {
+      position: absolute;
+      width: 460px;
+      height: 460px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 169, 74, 0.28) 0%, rgba(94, 34, 56, 0.35) 50%, transparent 70%);
+      filter: blur(35px);
+    }
+    .grand-crest-img {
+      width: 400px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 0 50px rgba(212, 169, 74, 0.65)) drop-shadow(0 25px 45px rgba(0, 0, 0, 0.95));
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Slide 2 visual: 4 Flacons Showcase */
+    .flacons-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .flacon-mini-card {
+      width: 165px;
+      background: rgba(31, 11, 23, 0.82);
+      border: 1px solid rgba(212, 169, 74, 0.45);
+      border-radius: 12px;
+      padding: 14px 12px;
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.85), 0 0 25px rgba(212, 169, 74, 0.18);
+      backdrop-filter: blur(8px);
+      transition: transform 0.3s ease;
+    }
+    .flacon-mini-card img {
+      width: 100%;
+      height: 195px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border: 1px solid rgba(212, 169, 74, 0.25);
+    }
+    .flacon-mini-name {
+      font-family: 'Cinzel', serif;
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      color: #D4A94A;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 600;
+    }
+    .flacon-mini-sub {
+      font-size: 9.5px;
+      letter-spacing: 0.18em;
+      color: #F0E4D3;
+      opacity: 0.8;
+      text-transform: uppercase;
+      white-space: nowrap;
+      margin-top: 3px;
+    }
+    .flacon-mini-price {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #F0E4D3;
+      margin-top: 5px;
+      letter-spacing: 0.08em;
+    }
+
+    /* Slide 3 visual: Coffret Deluxe Showcase */
+    .coffret-deluxe-box {
+      width: 600px;
+      background: rgba(28, 10, 20, 0.88);
+      border: 1.5px solid rgba(212, 169, 74, 0.55);
+      border-radius: 16px;
+      padding: 24px 28px;
+      box-shadow: 0 25px 55px rgba(0, 0, 0, 0.9), 0 0 35px rgba(212, 169, 74, 0.22);
+      backdrop-filter: blur(12px);
+    }
+    .coffret-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(212, 169, 74, 0.25);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+    .coffret-header-text {
+      text-align: right;
+    }
+    .coffret-badge {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: #D4A94A;
+      text-transform: uppercase;
+      font-weight: 700;
+      display: block;
+    }
+    .coffret-sub {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: #F0E4D3;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+    .coffret-bottles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+    .coffret-bottle-item {
+      background: rgba(42, 19, 32, 0.65);
+      border: 1px solid rgba(212, 169, 74, 0.32);
+      border-radius: 8px;
+      padding: 8px;
+      text-align: center;
+    }
+    .coffret-bottle-item img {
+      width: 100%;
+      height: 125px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 6px;
+    }
+    .coffret-bottle-item span {
+      display: block;
+      font-family: 'Cinzel', serif;
+      font-size: 9.5px;
+      color: #D4A94A;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .coffret-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(212, 169, 74, 0.25);
+      padding-top: 12px;
+    }
+    .coffret-price-box {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .coffret-deal-price {
+      font-size: 24px;
+      font-weight: 700;
+      color: #D4A94A;
+      letter-spacing: 0.05em;
+    }
+    .coffret-old-price {
+      font-size: 14px;
+      text-decoration: line-through;
+      color: #F0E4D3;
+      opacity: 0.5;
+    }
+    .coffret-save {
+      background: rgba(212, 169, 74, 0.2);
+      color: #E6BF62;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      padding: 3px 9px;
+      border-radius: 4px;
+      border: 1px solid rgba(212, 169, 74, 0.4);
+    }
+    .coffret-voucher {
+      font-size: 11px;
+      color: #D4A94A;
+      letter-spacing: 0.18em;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SLIDE 1: HERITAGE & FESTIVE PRIVILEGE -->
+  <div id="slide1" class="slide-canvas active">
+    <img src="hero-bg.jpg" class="bg-img" alt="Maison Yojaki Plinth Backdrop">
+    <div class="vignette-overlay"></div>
+    
+    <div class="slide-inner">
+      <div class="slide-left-content">
+        <div class="eyebrow">
+          <img src="Logo.png" class="eyebrow-logo" alt="Crest">
+          <span>MAISON YOJAKI · HAUTE PARFUMERIE · NEW DELHI</span>
+        </div>
+        <h1 class="headline">SEASONAL ATELIER<br>PRIVILEGE</h1>
+        <p class="subhead">50% OFF SITEWIDE + COMPLIMENTARY 48-HOUR EXPRESS DISPATCH<br>DISCOVER ARTISANAL EXTRAITS HAND-CRAFTED WITH SACRED BOTANICALS</p>
+        <div class="btn-row">
+          <a href="#bestsellers" class="gold-btn">CLAIM 50% PRIVILEGE <span>→</span></a>
+          <a href="shop.html" class="outline-btn">VIEW ALL CREATIONS</a>
+        </div>
+      </div>
+
+      <div class="slide-right-visual">
+        <div class="grand-crest-wrap">
+          <div class="grand-crest-glow"></div>
+          <img src="Logo.png" class="grand-crest-img" alt="YOJAKI Crest">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: THE 4 FLAGSHIP EXTRAITS -->
+  <div id="slide2" class="slide-canvas">
+    <img src="bg-thander.jpg" class="bg-img" alt="Ocean Storm Backdrop">
+    <div class="vignette-overlay"></div>
+
+    <div class="slide-inner">
+      <div class="slide-left-content">
+        <div class="badge-pill">60-DAY COLD MACERATION CELLAR SELECTION</div>
+        <h2 class="headline">THE FOUR MASTERPIECE<br>EXTRAITS</h2>
+        <p class="subhead">POWERFUL 28% CONCENTRATION · COMMANDING 14+ HOUR LONGEVITY<br>THANDER · HAAWAS + ICE · ROSE FLORA · COOL WATER</p>
+        <div class="btn-row">
+          <a href="shop.html" class="gold-btn">EXPLORE 50 ML FLACONS <span>→</span></a>
+          <a href="product-thander.html" class="outline-btn">DISCOVER THANDER</a>
+        </div>
+      </div>
+
+      <div class="slide-right-visual">
+        <div class="flacons-row">
+          <div class="flacon-mini-card">
+            <img src="Product 4.jpeg" alt="Thander">
+            <div class="flacon-mini-name">THANDER</div>
+            <div class="flacon-mini-sub">DARK MARINE</div>
+            <div class="flacon-mini-price">₹2,499</div>
+          </div>
+          <div class="flacon-mini-card">
+            <img src="product 1.jpeg" alt="Haawas + Ice">
+            <div class="flacon-mini-name">HAAWAS + ICE</div>
+            <div class="flacon-mini-sub">GLACIAL AQUATIC</div>
+            <div class="flacon-mini-price">₹2,299</div>
+          </div>
+          <div class="flacon-mini-card">
+            <img src="Product 2.jpeg" alt="Rose Flora">
+            <div class="flacon-mini-name">ROSE FLORA</div>
+            <div class="flacon-mini-sub">DAMASK ROSE</div>
+            <div class="flacon-mini-price">₹2,199</div>
+          </div>
+          <div class="flacon-mini-card">
+            <img src="Product 3.jpeg" alt="Cool Water">
+            <div class="flacon-mini-name">COOL WATER</div>
+            <div class="flacon-mini-sub">SOLAR OCEAN</div>
+            <div class="flacon-mini-price">₹1,999</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3: THE DISCOVERY COFFRET -->
+  <div id="slide3" class="slide-canvas">
+    <img src="offer-banner.jpg" class="bg-img" alt="Festive Palace Ambience">
+    <div class="vignette-overlay"></div>
+
+    <div class="slide-inner">
+      <div class="slide-left-content">
+        <div class="badge-pill">FESTIVE COMPLIMENTARY PRIVILEGE</div>
+        <h2 class="headline">THE DISCOVERY<br>COFFRET</h2>
+        <p class="subhead">ALL FOUR ARTISANAL EXTRAITS IN 25 ML PRESENTATION FLACONS<br>INCLUDES 100% REDEEMABLE ₹500 ATELIER VOUCHER WITH FREE EXPRESS DISPATCH</p>
+        <div class="btn-row">
+          <a href="shop.html" class="gold-btn">ORDER COFFRET · ₹1,299 <span>→</span></a>
+          <a href="about.html" class="outline-btn">OUR ATELIER HERITAGE</a>
+        </div>
+      </div>
+
+      <div class="slide-right-visual">
+        <div class="coffret-deluxe-box">
+          <div class="coffret-header">
+            <img src="Logo.png" style="height: 44px; width: auto;" alt="YOJAKI">
+            <div class="coffret-header-text">
+              <span class="coffret-badge">LIMITED ATELIER EDITION</span>
+              <span class="coffret-sub">4 × 25 ML EXTRAIT COFFRET</span>
+            </div>
+          </div>
+          <div class="coffret-bottles-grid">
+            <div class="coffret-bottle-item">
+              <img src="Product 4.jpeg" alt="Thander">
+              <span>THANDER</span>
+            </div>
+            <div class="coffret-bottle-item">
+              <img src="product 1.jpeg" alt="Haawas + Ice">
+              <span>HAAWAS</span>
+            </div>
+            <div class="coffret-bottle-item">
+              <img src="Product 2.jpeg" alt="Rose Flora">
+              <span>ROSE FLORA</span>
+            </div>
+            <div class="coffret-bottle-item">
+              <img src="Product 3.jpeg" alt="Cool Water">
+              <span>COOL WATER</span>
+            </div>
+          </div>
+          <div class="coffret-footer">
+            <div class="coffret-price-box">
+              <span class="coffret-deal-price">₹1,299</span>
+              <span class="coffret-old-price">₹1,999</span>
+              <span class="coffret-save">SAVE 35%</span>
+            </div>
+            <span class="coffret-voucher">+ ₹500 VOUCHER INCLUDED</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const s = params.get('slide') || '1';
+    document.querySelectorAll('.slide-canvas').forEach((el, idx) => {
+      if (el.id === 'slide' + s) el.classList.add('active');
+      else el.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const s = params.get('slide') || '1';
+    document.querySelectorAll('.slide-canvas').forEach((el, idx) => {
+      if (el.id === 'slide' + s) el.classList.add('active');
+      else el.classList.remove('active');
+    });
+  </script>
+</body>
+</html>

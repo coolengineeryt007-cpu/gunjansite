@@ -28,7 +28,7 @@ const INITIAL_DEMO_CART = [
     size: '4 x 25 ML',
     image: 'Logo.png',
     quantity: 1,
-    url: 'product-discovery-set.html'
+    url: 'shop.html'
   }
 ];
 
@@ -175,7 +175,7 @@ function ensureCartDrawer() {
 
   const drawerHTML = `
   <div id="CartDrawerOverlay" onclick="closeCartDrawer()" style="position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:99998;opacity:0;pointer-events:none;transition:opacity 0.35s ease;"></div>
-  <aside id="CartDrawer" style="position:fixed;top:0;right:0;bottom:0;width:min(90vw,440px);background:#2A1320;color:#F0E4D3;border-left:1px solid rgba(212,169,74,0.3);z-index:99999;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,0.85);">
+  <aside id="CartDrawer" style="position:fixed;top:0;right:0;bottom:0;width:min(90vw,440px);background:#2A1320;color:#F0E4D3;border-left:1px solid rgba(212,169,74,0.3);z-index:99999;transform:translateX(100%);visibility:hidden;transition:transform 0.35s cubic-bezier(0.16,1,0.3,1),visibility 0.35s;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(0,0,0,0.85);">
     <!-- Drawer Header -->
     <div style="padding:22px;border-bottom:1px solid rgba(212,169,74,0.25);display:flex;align-items:center;justify-content:space-between;">
       <div style="display:flex;align-items:center;gap:10px;">
@@ -222,6 +222,7 @@ function openCartDrawer() {
   const drawer = document.getElementById('CartDrawer');
   const overlay = document.getElementById('CartDrawerOverlay');
   if (drawer && overlay) {
+    drawer.style.visibility = 'visible';
     drawer.style.transform = 'translateX(0)';
     overlay.style.opacity = '1';
     overlay.style.pointerEvents = 'auto';
@@ -235,6 +236,11 @@ function closeCartDrawer() {
     drawer.style.transform = 'translateX(100%)';
     overlay.style.opacity = '0';
     overlay.style.pointerEvents = 'none';
+    setTimeout(() => {
+      if (drawer.style.transform === 'translateX(100%)') {
+        drawer.style.visibility = 'hidden';
+      }
+    }, 350);
   }
 }
 

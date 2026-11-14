@@ -150,19 +150,68 @@
       background: #D4A94A;
       z-index: 1;
     }
+    .site-header {
+      width: 100%;
+      background: #0E030B;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(212, 169, 74, 0.35);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.55);
+      padding: 14px 0;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .site-brand-logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 18px;
+      background: radial-gradient(circle at 50% 50%, rgba(212, 169, 74, 0.22) 0%, rgba(212, 169, 74, 0.05) 55%, transparent 75%);
+      border-radius: 9999px;
+    }
+    .site-brand-logo img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 10px rgba(245, 206, 118, 0.5)) brightness(1.12) contrast(1.06);
+    }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .header-nav a {
+      color: rgba(240, 228, 211, 0.8);
+      transition: color 0.25s ease;
+    }
+    .header-nav a:hover {
+      color: #E6BF62;
+    }
   </style>
 </head>
 <body class="bg-ground text-ivory">
 
   <!-- Header -->
-  <header style="padding: 20px 0; border-bottom: 1px solid var(--border-gold);">
-    <div class="container-amenca" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
-      <a href="index.html" style="display: flex; align-items: center; gap: 12px;">
-        <img src="Logo.png" alt="YOJAKI DE LUXE" style="height: 68px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 10px rgba(212, 169, 74, 0.28));">
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-brand-logo" aria-label="Yojaki Haute Parfumerie Home">
+        <img src="Logo.png" alt="YOJAKI HAUTE PARFUMERIE">
       </a>
-      <div style="display: flex; align-items: center; gap: 24px; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;">
-        <a href="index.html" style="color: rgba(240, 228, 211, 0.8);" onmouseover="this.style.color='#D4A94A'" onmouseout="this.style.color='rgba(240, 228, 211, 0.8)'">Home</a>
-        <a href="shop.html" style="color: #D4A94A; font-weight: 500;">Shop Collection →</a>
+      <div class="header-nav">
+        <a href="index.html">Home</a>
+        <a href="shop.html" style="color: #E6BF62; font-weight: 600;">Shop Collection →</a>
       </div>
     </div>
   </header>

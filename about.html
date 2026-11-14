@@ -18,7 +18,7 @@
       --gold-light: #E6BF62;
       --ivory: #F0E4D3;
       --wine-accent: #5E2238;
-      --border-gold: rgba(212, 169, 74, 0.24);
+      --border-gold: rgba(212, 169, 74, 0.28);
       --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --font-serif: 'Cinzel', serif;
       --font-display: 'Outfit', sans-serif;
@@ -31,11 +31,11 @@
     }
 
     body {
-      background-color: var(--ground);
+      background-color: var(--ground-dark);
       color: var(--ivory);
       font-family: var(--font-body);
       font-weight: 300;
-      line-height: 1.5;
+      line-height: 1.6;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
@@ -43,7 +43,7 @@
     a {
       color: inherit;
       text-decoration: none;
-      transition: color 0.25s ease, opacity 0.25s ease;
+      transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
     }
 
     img {
@@ -52,16 +52,11 @@
       display: block;
     }
 
-    .bg-ground { background-color: var(--ground); }
+    .bg-ground { background-color: var(--ground-dark); }
     .text-gold { color: var(--gold); }
     .text-ivory { color: var(--ivory); }
     .gold-border-b { border-bottom: 1px solid var(--border-gold); }
     .gold-border-t { border-top: 1px solid var(--border-gold); }
-
-    .bg-gold-bar {
-      background-color: #D4A94A !important;
-      color: #2A1320 !important;
-    }
 
     .orn {
       display: flex;
@@ -73,7 +68,7 @@
     .orn::before, .orn::after {
       content: "";
       height: 1px;
-      width: 3.5rem;
+      width: 4rem;
       background: linear-gradient(90deg, transparent, currentColor);
     }
     .orn::after { transform: scaleX(-1); }
@@ -85,56 +80,70 @@
       display: inline-block;
     }
 
+    .container-amenca {
+      width: 100%;
+      max-width: 1320px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    /* Buttons */
     .gold-pill-btn {
-      background-color: var(--gold);
-      color: var(--ground);
-      font-size: 0.72rem;
+      background: linear-gradient(90deg, #C5983A 0%, #F5CE76 50%, #C5983A 100%);
+      background-size: 200% auto;
+      color: #1F0B17 !important;
+      font-size: 0.76rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      font-weight: 600;
-      padding: 0.95rem 2.4rem;
+      font-weight: 800;
+      padding: 1.05rem 2.4rem;
       border-radius: 9999px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 0.25s ease, transform 0.2s ease;
-      cursor: pointer;
+      gap: 10px;
       border: none;
-      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(212, 169, 74, 0.35);
+      transition: all 0.3s ease;
+      text-decoration: none;
     }
     .gold-pill-btn:hover {
-      background-color: var(--gold-light);
-      transform: translateY(-1px);
+      background-position: right center;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(212, 169, 74, 0.5);
     }
 
-    .container-amenca {
-      width: 100%;
-      max-width: 1440px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-
-    dialog#MobileMenu {
-      position: fixed;
-      inset: 0;
-      margin: 0;
-      padding: 0;
-      height: 100dvh;
-      width: min(88vw, 380px);
-      background-color: #2A1320;
+    .wine-pill-btn {
+      background: rgba(94, 34, 56, 0.6);
+      border: 1.5px solid rgba(212, 169, 74, 0.4);
       color: #F0E4D3;
-      border: none;
-      border-right: 1px solid rgba(212, 169, 74, 0.25);
-      z-index: 9999;
-      transform: translateX(-100%);
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      font-size: 0.74rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 1.02rem 2.2rem;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+      text-decoration: none;
     }
-    dialog#MobileMenu.open { transform: translateX(0); display: block; }
-    dialog#MobileMenu::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); }
+    .wine-pill-btn:hover {
+      background: rgba(94, 34, 56, 0.9);
+      border-color: #E6BF62;
+      transform: translateY(-2px);
+      color: #FFFFFF;
+      box-shadow: 0 8px 24px rgba(212, 169, 74, 0.25);
+    }
 
-    /* Header Navigation & Responsive Rules */
+    /* Announcement Banner */
     .announcement-banner {
       width: 100%;
       background: linear-gradient(90deg, #C5983A 0%, #E6BF62 50%, #C5983A 100%);
@@ -173,10 +182,6 @@
       opacity: 0.8;
       transform: translateY(-0.5px);
     }
-    .announcement-dot {
-      font-size: 7px;
-      opacity: 0.6;
-    }
 
     @media (max-width: 768px) {
       .announcement-desktop {
@@ -189,179 +194,886 @@
       }
     }
 
+    /* Header */
     .site-header {
       width: 100%;
-      background: rgba(31, 11, 23, 0.94);
+      background: #0E030B; /* Deep Obsidian Noir for high-contrast gold branding */
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       position: sticky;
       top: 0;
-      z-index: 50;
-      border-bottom: 1px solid rgba(212, 169, 74, 0.28);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(212, 169, 74, 0.12);
+      z-index: 1000;
+      border-bottom: 1px solid rgba(212, 169, 74, 0.35);
     }
     .site-header-inner {
-      height: 92px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      position: relative;
+      height: 80px;
     }
-
-    .site-brand-logo {
-      display: flex;
-      align-items: center;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
-    }
-    .site-brand-logo:hover {
-      transform: scale(1.03);
-      opacity: 0.95;
-    }
-    .site-brand-logo img {
-      height: 74px;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 2px 12px rgba(212, 169, 74, 0.28));
-    }
-
     .header-hamburger-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
+      display: none;
       background: none;
       border: none;
-      color: #F0E4D3;
+      color: var(--ivory);
       cursor: pointer;
-      padding: 0;
-      border-radius: 50%;
-      transition: background-color 0.2s ease, color 0.2s ease;
+      padding: 8px;
     }
-    .header-hamburger-btn:hover {
-      color: var(--gold);
-      background: rgba(212, 169, 74, 0.1);
+    .site-brand-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      position: relative;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: radial-gradient(ellipse at center, rgba(212, 169, 74, 0.22) 0%, rgba(212, 169, 74, 0.05) 55%, transparent 75%);
     }
-
+    .site-brand-logo img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 10px rgba(245, 206, 118, 0.5)) brightness(1.12) contrast(1.06);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    .site-brand-logo:hover img {
+      transform: scale(1.04);
+      filter: drop-shadow(0 4px 18px rgba(245, 206, 118, 0.75)) brightness(1.2);
+    }
     .desktop-header-nav {
-      display: none;
+      display: flex;
       align-items: center;
       gap: 36px;
-      font-size: 11.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.28em;
     }
     .header-nav-link {
-      color: rgba(240, 228, 211, 0.82);
-      transition: color 0.3s ease;
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.85);
+      font-weight: 500;
       position: relative;
-      padding: 8px 0;
-      font-weight: 400;
+      padding-bottom: 4px;
     }
-    .header-nav-link::after {
+    .header-nav-link:hover, .header-nav-link.active {
+      color: #E6BF62;
+    }
+    .header-nav-link.active::after, .header-nav-link:hover::after {
       content: '';
       position: absolute;
       bottom: 0;
-      left: 50%;
-      width: 0%;
-      height: 1.5px;
-      background: linear-gradient(90deg, transparent, #D4A94A 20%, #E6BF62 50%, #D4A94A 80%, transparent);
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      transform: translateX(-50%);
-    }
-    .header-nav-link:hover {
-      color: #E6BF62;
-    }
-    .header-nav-link:hover::after, .header-nav-link.active::after {
+      left: 0;
       width: 100%;
+      height: 1px;
+      background: #D4A94A;
     }
-    .header-nav-link.active {
-      color: var(--gold);
-      font-weight: 600;
-    }
-
     .header-actions-wrap {
       display: flex;
       align-items: center;
-      gap: 12px;
-      color: #F0E4D3;
+      gap: 20px;
     }
     .header-action-btn {
+      background: none;
+      border: none;
+      color: rgba(240, 228, 211, 0.9);
+      cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      color: #F0E4D3;
-      transition: all 0.25s ease;
-      position: relative;
-      background: none;
-      border: none;
-      cursor: pointer;
+      transition: color 0.2s ease, transform 0.2s ease;
     }
     .header-action-btn:hover {
-      color: var(--gold);
-      background: rgba(212, 169, 74, 0.12);
+      color: #E6BF62;
       transform: translateY(-1px);
     }
     .cart-count-badge {
       position: absolute;
-      top: 4px;
-      right: 2px;
-      min-width: 18px;
-      height: 18px;
-      padding: 0 4px;
-      border-radius: 9999px;
+      top: -6px;
+      right: -8px;
       background: #D4A94A;
       color: #1F0B17;
-      font-size: 10.5px;
+      font-size: 10px;
       font-weight: 700;
+      border-radius: 9999px;
+      width: 17px;
+      height: 17px;
       display: flex;
       align-items: center;
       justify-content: center;
-      line-height: 1;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
-      border: 1.5px solid #2A1320;
     }
 
-    @media (max-width: 899px) {
-      .site-header-inner {
-        height: 74px;
+    dialog#MobileMenu {
+      position: fixed;
+      inset: 0;
+      margin: 0;
+      padding: 0;
+      height: 100dvh;
+      width: min(88vw, 380px);
+      background-color: #2A1320;
+      color: #F0E4D3;
+      border: none;
+      border-right: 1px solid rgba(212, 169, 74, 0.25);
+      z-index: 9999;
+      transform: translateX(-100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    dialog#MobileMenu.open { transform: translateX(0); display: block; }
+    dialog#MobileMenu::backdrop { background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(4px); }
+
+    @media (max-width: 900px) {
+      .header-hamburger-btn { display: flex; }
+      .desktop-header-nav { display: none; }
+      .site-header-inner { height: 70px; }
+      .site-brand-logo img { height: 46px; }
+    }
+
+    /* --------------------------------------------------------------------------
+       HERO STYLING
+       -------------------------------------------------------------------------- */
+    .about-hero {
+      position: relative;
+      padding: 120px 20px 105px 20px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-gold);
+      background: radial-gradient(circle at 50% 15%, rgba(94, 34, 56, 0.55) 0%, rgba(31, 11, 23, 0.98) 75%);
+      overflow: hidden;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(212, 169, 74, 0.12) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 169, 74, 0.12);
+      border: 1px solid rgba(212, 169, 74, 0.38);
+      border-radius: 9999px;
+      padding: 6px 18px;
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 5.2vw, 4.4rem);
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 22px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F5E5C9 35%, #D4A94A 80%, #B3862A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-lead-text {
+      font-size: 13.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.88);
+      line-height: 1.85;
+      max-width: 780px;
+      margin: 0 auto 36px auto;
+    }
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* --------------------------------------------------------------------------
+       EDITORIAL GENESIS SECTION
+       -------------------------------------------------------------------------- */
+    .genesis-section {
+      padding: 105px 20px;
+      border-bottom: 1px solid var(--border-gold);
+      background: radial-gradient(circle at 10% 50%, rgba(94, 34, 56, 0.25) 0%, rgba(31, 11, 23, 0.95) 70%);
+    }
+    .genesis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 65px;
+      align-items: center;
+    }
+    .genesis-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.4vw, 3rem);
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      line-height: 1.2;
+      margin-bottom: 24px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F5E5C9 45%, #D4A94A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .genesis-para {
+      font-size: 12.5px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.82);
+      line-height: 1.9;
+      margin-bottom: 22px;
+    }
+    .editorial-quote-box {
+      margin-top: 32px;
+      border-left: 2px solid #D4A94A;
+      padding: 18px 22px;
+      background: rgba(31, 11, 23, 0.65);
+      border-radius: 0 10px 10px 0;
+      border-top: 1px solid rgba(212, 169, 74, 0.15);
+      border-bottom: 1px solid rgba(212, 169, 74, 0.15);
+      border-right: 1px solid rgba(212, 169, 74, 0.15);
+    }
+    .editorial-quote-text {
+      font-family: var(--font-serif);
+      font-size: 13.5px;
+      letter-spacing: 0.14em;
+      color: #E6BF62;
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .editorial-quote-author {
+      font-size: 10px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.6);
+    }
+    .plinth-vitrine-card {
+      position: relative;
+      border-radius: 18px;
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      background: radial-gradient(circle at 50% 30%, rgba(94, 34, 56, 0.45) 0%, rgba(18, 7, 14, 0.98) 75%);
+      padding: 18px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(212, 169, 74, 0.12);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    .plinth-vitrine-card:hover {
+      border-color: #E6BF62;
+      box-shadow: 0 30px 75px rgba(0, 0, 0, 0.9), 0 0 45px rgba(212, 169, 74, 0.28);
+      transform: translateY(-4px);
+    }
+    .plinth-img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .plinth-vitrine-card:hover .plinth-img {
+      transform: scale(1.025);
+    }
+    .plinth-badge-top {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      background: rgba(14, 5, 10, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 169, 74, 0.4);
+      border-radius: 9999px;
+      padding: 5px 14px;
+      font-size: 9.5px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+    }
+    .plinth-badge-bottom {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      right: 30px;
+      background: rgba(14, 5, 10, 0.8);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(212, 169, 74, 0.3);
+      border-radius: 10px;
+      padding: 12px 18px;
+      font-size: 10.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.9);
+      text-align: center;
+    }
+
+    /* --------------------------------------------------------------------------
+       COLD MACERATION TECHNICAL DISTINCTION (3 CARDS)
+       -------------------------------------------------------------------------- */
+    .maceration-section {
+      padding: 110px 20px;
+      background: radial-gradient(circle at 50% 0%, rgba(94, 34, 56, 0.3) 0%, rgba(18, 7, 14, 0.98) 75%);
+      border-bottom: 1px solid var(--border-gold);
+    }
+    .section-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+      margin-bottom: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212, 169, 74, 0.12);
+      border: 1px solid rgba(212, 169, 74, 0.32);
+      border-radius: 9999px;
+      padding: 5px 16px;
+    }
+    .section-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 3.8vw, 3.2rem);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin-bottom: 16px;
+      background: linear-gradient(180deg, #FFFFFF 0%, #F5E5C9 40%, #D4A94A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .section-subtitle {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.78);
+      max-width: 680px;
+      margin: 0 auto 55px auto;
+      line-height: 1.8;
+    }
+    .maceration-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      text-align: left;
+    }
+    .tech-card {
+      position: relative;
+      background: radial-gradient(circle at 50% 20%, rgba(42, 19, 32, 0.85) 0%, rgba(20, 8, 15, 0.92) 100%);
+      border: 1px solid rgba(212, 169, 74, 0.28);
+      border-radius: 16px;
+      padding: 38px 28px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(212, 169, 74, 0.06);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .tech-card:hover {
+      transform: translateY(-8px);
+      border-color: #E6BF62;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(212, 169, 74, 0.25);
+    }
+    .tech-num-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .tech-num {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 400;
+      color: #D4A94A;
+      line-height: 1;
+    }
+    .tech-pill {
+      font-size: 9px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      background: rgba(212, 169, 74, 0.12);
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      border-radius: 9999px;
+      padding: 3px 10px;
+      font-weight: 600;
+    }
+    .tech-title {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin-bottom: 14px;
+    }
+    .tech-body {
+      font-size: 11.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.72);
+      line-height: 1.85;
+    }
+
+    /* --------------------------------------------------------------------------
+       THE FOUR MASTER COMPOSITIONS (SHOWCASE)
+       -------------------------------------------------------------------------- */
+    .showcase-section {
+      padding: 105px 20px;
+      border-bottom: 1px solid var(--border-gold);
+      background: radial-gradient(circle at 50% 50%, rgba(94, 34, 56, 0.25) 0%, rgba(18, 7, 14, 0.98) 75%);
+    }
+    .product-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: left;
+    }
+    .product-card {
+      position: relative;
+      border-radius: 18px;
+      background: radial-gradient(circle at 50% 20%, rgba(42, 19, 32, 0.92) 0%, rgba(20, 8, 15, 0.96) 100%);
+      border: 1px solid rgba(212, 169, 74, 0.28);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), 0 0 25px rgba(212, 169, 74, 0.08);
+      padding: 20px 18px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: #E6BF62;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.85), 0 0 35px rgba(212, 169, 74, 0.28);
+    }
+    .product-card-stage {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1.05;
+      border-radius: 14px;
+      background: radial-gradient(circle at 50% 40%, rgba(94, 34, 56, 0.4) 0%, rgba(18, 7, 14, 0.95) 75%);
+      border: 1px solid rgba(212, 169, 74, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      text-decoration: none;
+    }
+    .product-card:hover .product-card-stage {
+      border-color: rgba(212, 169, 74, 0.6);
+      background: radial-gradient(circle at 50% 40%, rgba(120, 40, 70, 0.5) 0%, rgba(18, 7, 14, 0.98) 75%);
+    }
+    .product-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+      filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));
+    }
+    .product-card:hover .product-card-img {
+      transform: scale(1.05);
+      filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.75));
+    }
+    .card-spec-label {
+      font-size: 9.5px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #D4A94A;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .card-title-link {
+      text-decoration: none;
+      color: inherit;
+    }
+    .card-product-title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+      transition: color 0.3s ease;
+    }
+    .product-card:hover .card-product-title {
+      color: #E6BF62;
+    }
+    .card-notes-text {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.68);
+      line-height: 1.55;
+      margin-bottom: 16px;
+      min-height: 34px;
+    }
+    .card-price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 18px;
+      margin-top: auto;
+    }
+    .card-price-now {
+      font-family: monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: #D4A94A;
+      letter-spacing: 0.04em;
+    }
+    .card-action-btns {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .card-btn-details {
+      flex: 1;
+      padding: 9px 12px;
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      border-radius: 9999px;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #F0E4D3;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+    .card-btn-details:hover {
+      border-color: #E6BF62;
+      background: rgba(212, 169, 74, 0.12);
+      color: #FFFFFF;
+    }
+    .card-btn-cart {
+      flex: 1.25;
+      padding: 9px 12px;
+      background: linear-gradient(90deg, #C5983A 0%, #F5CE76 100%);
+      color: #1F0B17;
+      font-weight: 700;
+      border-radius: 9999px;
+      border: none;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(212, 169, 74, 0.3);
+      transition: all 0.25s ease;
+    }
+    .card-btn-cart:hover {
+      background: linear-gradient(90deg, #F5CE76 0%, #C5983A 100%);
+      box-shadow: 0 6px 20px rgba(212, 169, 74, 0.5);
+      transform: translateY(-1px);
+    }
+
+    /* --------------------------------------------------------------------------
+       ATELIER PILLARS STRIP
+       -------------------------------------------------------------------------- */
+    .pillars-strip {
+      padding: 55px 20px;
+      background: rgba(31, 11, 23, 0.95);
+      border-bottom: 1px solid var(--border-gold);
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .pillar-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 18px;
+      background: rgba(42, 19, 32, 0.45);
+      border: 1px solid rgba(212, 169, 74, 0.2);
+      border-radius: 12px;
+      transition: border-color 0.3s ease;
+    }
+    .pillar-item:hover {
+      border-color: rgba(212, 169, 74, 0.45);
+    }
+    .pillar-icon {
+      font-size: 24px;
+      line-height: 1;
+      filter: drop-shadow(0 2px 8px rgba(212, 169, 74, 0.3));
+    }
+    .pillar-title {
+      font-family: var(--font-serif);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+    .pillar-desc {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.65);
+    }
+
+    /* --------------------------------------------------------------------------
+       CONCIERGE & PRIVATE APPOINTMENTS SECTION
+       -------------------------------------------------------------------------- */
+    .appointments-section {
+      padding: 100px 20px;
+      border-bottom: 1px solid var(--border-gold);
+      background: radial-gradient(circle at 90% 50%, rgba(94, 34, 56, 0.35) 0%, rgba(18, 7, 14, 0.98) 75%);
+    }
+    .appointments-card {
+      max-width: 980px;
+      margin: 0 auto;
+      background: radial-gradient(circle at 50% 0%, rgba(94, 34, 56, 0.5) 0%, rgba(31, 11, 23, 0.92) 80%);
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      border-radius: 20px;
+      padding: 55px 45px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    /* --------------------------------------------------------------------------
+       FOOTER
+       -------------------------------------------------------------------------- */
+    .amenca-luxury-footer {
+      background-color: #170812;
+      color: #F0E4D3;
+      padding: 55px 24px 0 24px;
+      border-top: 1px solid rgba(212, 169, 74, 0.24);
+      position: relative;
+    }
+    .footer-modern-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1.3fr;
+      gap: 50px;
+    }
+    .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .footer-brand-logo {
+      height: 48px;
+      width: auto;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 2px 8px rgba(212, 169, 74, 0.25));
+    }
+    .footer-brand-text {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      line-height: 1.7;
+      color: rgba(240, 228, 211, 0.7);
+      margin-bottom: 18px;
+      max-width: 320px;
+      text-transform: uppercase;
+    }
+    .footer-simple-concierge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(212, 169, 74, 0.1);
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      border-radius: 9999px;
+      padding: 8px 18px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .footer-simple-concierge:hover {
+      background: rgba(212, 169, 74, 0.2);
+      border-color: #E6BF62;
+      color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+    .footer-simple-concierge svg {
+      width: 14px;
+      height: 14px;
+    }
+    .footer-col-header {
+      font-family: var(--font-serif);
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .footer-nav-simple {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-nav-simple a {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.75);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-nav-simple a:hover {
+      color: #FFFFFF;
+      transform: translateX(4px);
+    }
+    .footer-nav-simple a::before {
+      content: '✦';
+      font-size: 7px;
+      color: #D4A94A;
+      opacity: 0.5;
+    }
+    .footer-contact-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .footer-contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .footer-contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .footer-contact-label {
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+    }
+    .footer-contact-val {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: rgba(240, 228, 211, 0.75);
+      line-height: 1.6;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .footer-contact-link:hover {
+      color: #FFFFFF;
+    }
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(212, 169, 74, 0.18);
+      padding: 22px 0;
+      margin-top: 48px;
+    }
+    .footer-bottom-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .footer-copyright {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      color: rgba(240, 228, 211, 0.55);
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    /* --------------------------------------------------------------------------
+       RESPONSIVE BREAKPOINTS
+       -------------------------------------------------------------------------- */
+    @media (max-width: 1100px) {
+      .product-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
       }
-      .site-brand-logo img {
-        height: 52px;
+      .pillars-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
-      .header-actions-wrap {
-        gap: 6px;
-      }
-      .header-action-btn {
-        width: 36px;
-        height: 36px;
+      .maceration-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
       }
     }
-    @media (min-width: 900px) {
-      .header-hamburger-btn {
-        display: none !important;
+
+    @media (max-width: 860px) {
+      .genesis-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
       }
-      .desktop-header-nav {
-        display: flex !important;
+      .about-hero {
+        padding: 90px 20px 80px 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .amenca-luxury-footer {
+        padding: 42px 18px 0 18px;
+        text-align: center;
+      }
+      .footer-modern-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
+      }
+      .footer-brand-col {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-brand-text {
+        margin: 0 auto 16px auto;
+      }
+      .footer-col-header {
+        margin-bottom: 14px;
+      }
+      .footer-nav-simple {
+        align-items: center;
+      }
+      .footer-contact-wrap {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-contact-item {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-bottom-bar {
+        margin-top: 32px;
+        padding: 18px 0;
+      }
+      .footer-bottom-inner {
+        justify-content: center;
+        text-align: center;
+      }
+      .footer-copyright {
+        font-size: 9.5px;
+        letter-spacing: 0.12em;
+      }
+      .product-grid-4 {
+        grid-template-columns: 1fr;
+        max-width: 380px;
+        margin: 0 auto;
+      }
+      .pillars-grid {
+        grid-template-columns: 1fr;
+      }
+      .appointments-card {
+        padding: 38px 22px;
       }
     }
   </style>
 </head>
 <body class="bg-ground text-ivory">
 
-  
-
-    <!-- ==========================================================================
+  <!-- ==========================================================================
        LUXURY MAISON ANNOUNCEMENT BAR
        ========================================================================== -->
   <aside class="announcement-banner">
     <div class="announcement-inner">
       <div class="announcement-desktop">
-        <a href="product-discovery-set.html" class="announcement-link">THE DISCOVERY SET: ALL FOUR FRAGRANCES IN 25 ML</a>
-        <span class="announcement-dot">◆</span>
         <a href="shop.html" class="announcement-link">FESTIVE PRIVILEGE: 50% OFF SITEWIDE + FREE EXPRESS SHIPPING</a>
       </div>
       <div class="announcement-mobile">
@@ -390,16 +1102,12 @@
       <nav class="desktop-header-nav">
         <a href="index.html" class="header-nav-link">Home</a>
         <a href="shop.html" class="header-nav-link">Shop</a>
-        <a href="product-discovery-set.html" class="header-nav-link">Discovery Set</a>
         <a href="about.html" class="header-nav-link active">Our Atelier</a>
         <a href="contact.html" class="header-nav-link">Contact</a>
       </nav>
 
       <!-- Right Action Icons (Search & Cart Bag) -->
       <div class="header-actions-wrap">
-        <a href="shop.html" aria-label="Search Collection" class="header-action-btn">
-          <svg style="width: 21px; height: 21px;" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>
-        </a>
         
         <a href="cart.html" data-open-cart aria-label="Shopping Cart" class="header-action-btn header-cart-btn" style="position: relative;">
           <svg style="width: 22px; height: 22px;" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25c-.669 0-1.188-.578-1.119-1.243l1.263-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"/></svg>
@@ -409,6 +1117,7 @@
     </div>
   </header>
 
+  <!-- Mobile Drawer -->
   <dialog id="MobileMenu">
     <div style="display: flex; height: 100%; flex-direction: column; overflow-y: auto; padding: 24px;">
       <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 20px; border-bottom: 1px solid rgba(212, 169, 74, 0.2);">
@@ -419,9 +1128,8 @@
       </div>
       <nav style="margin-top: 24px; display: flex; flex-direction: column;">
         <a href="index.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Home</span> →</a>
-        <a href="shop.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Shop Collection</span> →</a>
-        <a href="product-discovery-set.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Discovery Coffret</span> →</a>
-        <a href="about.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #D4A94A; display: flex; justify-content: space-between;"><span>Our Atelier</span> →</a>
+        <a href="shop.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #D4A94A; display: flex; justify-content: space-between;"><span>Shop Collection</span> →</a>
+        <a href="about.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #E6BF62; display: flex; justify-content: space-between;"><span>Our Atelier</span> →</a>
         <a href="contact.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #F0E4D3; display: flex; justify-content: space-between;"><span>Contact Concierge</span> →</a>
         <a href="cart.html" onclick="toggleMenu(false)" style="padding: 16px 0; border-bottom: 1px solid rgba(212, 169, 74, 0.15); font-size: 13px; letter-spacing: 0.3em; text-transform: uppercase; color: #D4A94A; display: flex; justify-content: space-between;"><span>Shopping Bag</span> →</a>
       </nav>
@@ -432,149 +1140,409 @@
     </div>
   </dialog>
 
-  <!-- Hero Section -->
-  <section style="position: relative; padding: 100px 20px 80px 20px; text-align: center; border-bottom: 1px solid var(--border-gold); background: radial-gradient(circle at center, rgba(94, 34, 56, 0.5) 0%, rgba(42, 19, 32, 0.98) 85%);">
-    <div class="container-amenca" style="max-width: 900px;">
-      <div style="margin-bottom: 20px;">
-        <img src="Logo.png" alt="Yojaki Emblem" style="width: 76px; height: 76px; border-radius: 50%; border: 1px solid var(--border-gold); padding: 4px; margin: 0 auto; box-shadow: 0 0 30px rgba(212, 169, 74, 0.3);">
+  <!-- ==========================================================================
+       HERO: OUR ATELIER HERITAGE
+       ========================================================================== -->
+  <section class="about-hero">
+    <div class="container-amenca" style="max-width: 960px;">
+      
+      <!-- Emblem Crest -->
+      <div style="margin-bottom: 22px;">
+        <img src="Logo.png" alt="Yojaki Golden Emblem" style="width: 82px; height: 82px; border-radius: 50%; border: 1.5px solid rgba(212, 169, 74, 0.4); padding: 5px; margin: 0 auto; box-shadow: 0 0 35px rgba(212, 169, 74, 0.35); background: rgba(31, 11, 23, 0.75);">
       </div>
-      <p style="font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 14px;">MAISON YOJAKI · EST. NEW DELHI</p>
-      <h1 style="font-family: var(--font-serif); font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ivory); margin-bottom: 20px;">
-        OUR ATELIER HERITAGE
+
+      <div class="hero-badge-pill">
+        ✦ MAISON YOJAKI ATELIER · EST. NEW DELHI ✦
+      </div>
+
+      <h1 class="hero-title">
+        Our Atelier Heritage
       </h1>
-      <div class="orn" style="margin-bottom: 24px;"><i></i></div>
-      <p style="font-size: 14px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(240, 228, 211, 0.85); line-height: 1.8; max-width: 720px; margin: 0 auto;">
-        Fusing 2,000 years of royal Indian botanical perfumery with the rigorous compounding standards of French haute perfumerie.
+
+      <div class="orn" style="margin-bottom: 26px;"><i></i></div>
+
+      <p class="hero-lead-text">
+        Fusing 2,000 years of royal Indian botanical perfumery with the rigorous compounding standards of French haute parfumerie.
       </p>
+
+      <div class="hero-cta-group">
+        <a href="shop.html" class="gold-pill-btn">
+          EXPLORE THE ARCHIVE →
+        </a>
+        <a href="#cold-maceration" class="wine-pill-btn">
+          OUR COLD MACERATION STANDARDS ↓
+        </a>
+      </div>
+
     </div>
   </section>
 
-  <!-- Philosophy Two-Column Grid -->
-  <section style="padding: 80px 20px; border-bottom: 1px solid var(--border-gold);">
+  <!-- ==========================================================================
+       EDITORIAL SECTION: THE GENESIS
+       ========================================================================== -->
+  <section class="genesis-section">
     <div class="container-amenca">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 60px; align-items: center;">
+      <div class="genesis-grid">
         
+        <!-- Left: Story Narrative -->
         <div>
-          <span style="font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600; display: block; margin-bottom: 14px;">THE GENESIS</span>
-          <h2 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); line-height: 1.2; margin-bottom: 24px;">
+          <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(212, 169, 74, 0.12); border: 1px solid rgba(212, 169, 74, 0.35); border-radius: 9999px; padding: 5px 16px; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: #E6BF62; font-weight: 600; margin-bottom: 18px;">
+            ✦ THE GENESIS ✦
+          </div>
+
+          <h2 class="genesis-heading">
             Born in the Historic Avenues of New Delhi
           </h2>
-          <p style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(240, 228, 211, 0.8); line-height: 1.9; margin-bottom: 20px;">
-            Maison Yojaki was founded with a singular conviction: luxury Indian perfumery should command the global stage alongside Grasse, Paris, and Milan.
+
+          <p class="genesis-para">
+            Maison Yojaki was founded with a singular, uncompromising conviction: luxury Indian perfumery should command the global stage alongside Grasse, Paris, and Milan.
           </p>
-          <p style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(240, 228, 211, 0.8); line-height: 1.9;">
-            From sacred blue lotus blossoms collected at dawn to tempestuous ambergris accords aged in dark cellar barrels, each composition is an unhurried devotion to olfactory permanence.
+
+          <p class="genesis-para">
+            From sacred blue lotus blossoms gathered at dawn in pristine waters to tempestuous ocean ambergris aged in dark cellar barrels, each composition is an unhurried devotion to olfactory permanence and technical purity.
           </p>
+
+          <!-- Artisanal Quote Card -->
+          <div class="editorial-quote-box">
+            <p class="editorial-quote-text">
+              “We do not engineer ephemeral scents for mass retail; we compound permanent liquid memories for the discerning connoisseur.”
+            </p>
+            <p class="editorial-quote-author">
+              — Master Perfumer, Ashok Vihar Atelier
+            </p>
+          </div>
         </div>
 
-        <div style="border: 1px solid var(--border-gold); padding: 14px; border-radius: 8px; background: rgba(31, 11, 23, 0.7); box-shadow: 0 20px 50px rgba(0,0,0,0.85);">
-          <img src="hero-bg.jpg" alt="Atelier Plinth" style="width: 100%; border-radius: 6px;">
+        <!-- Right: Plinth Vitrine Card -->
+        <div class="plinth-vitrine-card">
+          <img src="hero-bg.jpg" alt="Maison Yojaki Plinth Vitrine" class="plinth-img">
+          <div class="plinth-badge-top">
+            HAND-BOTTLED IN DELHI
+          </div>
+          <div class="plinth-badge-bottom">
+            <span style="color: #E6BF62; font-weight: 600;">60-DAY COLD MACERATION</span> · 28% OIL DENSITY
+          </div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- The 60-Day Cold Maceration Standard -->
-  <section style="padding: 90px 20px; background: rgba(31, 11, 23, 0.5); border-bottom: 1px solid var(--border-gold);">
-    <div class="container-amenca" style="text-align: center; max-width: 980px;">
-      <p style="font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 12px;">TECHNICAL DISTINCTION</p>
-      <h2 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 3.4vw, 2.8rem); font-weight: 300; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); margin-bottom: 18px;">
+  <!-- ==========================================================================
+       TECHNICAL DISTINCTION: WHY COLD MACERATION DEFINES YOJAKI
+       ========================================================================== -->
+  <section class="maceration-section" id="cold-maceration">
+    <div class="container-amenca" style="text-align: center;">
+      
+      <div class="section-eyebrow">
+        ✦ ARTISANAL SCIENCE ✦
+      </div>
+
+      <h2 class="section-heading">
         Why Cold Maceration Defines Yojaki
       </h2>
-      <div class="orn" style="margin-bottom: 30px;"><i></i></div>
-      <p style="font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(240, 228, 211, 0.8); line-height: 1.8; margin-bottom: 50px;">
+
+      <div class="orn" style="margin-bottom: 24px;"><i></i></div>
+
+      <p class="section-subtitle">
         Mass commercial perfumery heats essence oils to artificially speed compounding. At Maison Yojaki, we refuse to compromise.
       </p>
 
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px; text-align: left;">
+      <!-- 3 Glassmorphism Cards -->
+      <div class="maceration-grid">
         
-        <div style="background: rgba(42, 19, 32, 0.8); border: 1px solid var(--border-gold); padding: 30px 24px; border-radius: 6px;">
-          <div style="font-size: 24px; color: var(--gold); margin-bottom: 14px;">01</div>
-          <h3 style="font-family: var(--font-serif); font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); margin-bottom: 12px;">28% Pure Extrait</h3>
-          <p style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240, 228, 211, 0.7); line-height: 1.8;">
-            We compound at Extrait de Parfum concentration (28%), far above typical Eau de Toilette (8-12%) or commercial Eau de Parfum (15%).
+        <!-- Card 1 -->
+        <div class="tech-card">
+          <div class="tech-num-badge">
+            <span class="tech-num">01</span>
+            <span class="tech-pill">EXTRAIT GRADE</span>
+          </div>
+          <h3 class="tech-title">28% Pure Extrait</h3>
+          <p class="tech-body">
+            We compound at true Extrait de Parfum concentration (28%), far above commercial Eau de Parfum (12–15%) or typical Eau de Toilette (8–10%). This extreme oil density produces remarkable longevity exceeding 14 uninterrupted hours on skin and linen.
           </p>
         </div>
 
-        <div style="background: rgba(42, 19, 32, 0.8); border: 1px solid var(--border-gold); padding: 30px 24px; border-radius: 6px;">
-          <div style="font-size: 24px; color: var(--gold); margin-bottom: 14px;">02</div>
-          <h3 style="font-family: var(--font-serif); font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); margin-bottom: 12px;">60 Days Cold Rest</h3>
-          <p style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240, 228, 211, 0.7); line-height: 1.8;">
-            Bottled oils rest undisturbed in chilled dark steel chambers at 12°C for two complete lunar cycles, allowing top and base molecules to interlock naturally.
+        <!-- Card 2 -->
+        <div class="tech-card">
+          <div class="tech-num-badge">
+            <span class="tech-num">02</span>
+            <span class="tech-pill">60-DAY MATURATION</span>
+          </div>
+          <h3 class="tech-title">60 Days Cold Rest</h3>
+          <p class="tech-body">
+            Bottled oils rest undisturbed in chilled dark steel chambers at 12°C across two complete lunar cycles. Top citrus notes and dense base resins seamlessly integrate without thermal degradation or chemical accelerators.
           </p>
         </div>
 
-        <div style="background: rgba(42, 19, 32, 0.8); border: 1px solid var(--border-gold); padding: 30px 24px; border-radius: 6px;">
-          <div style="font-size: 24px; color: var(--gold); margin-bottom: 14px;">03</div>
-          <h3 style="font-family: var(--font-serif); font-size: 16px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); margin-bottom: 12px;">Hand-Crimped Seal</h3>
-          <p style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240, 228, 211, 0.7); line-height: 1.8;">
-            Every French glass bottle is crimped by hand at our Ashok Vihar atelier with a vacuum gold collar and verified under magnifying optics.
+        <!-- Card 3 -->
+        <div class="tech-card">
+          <div class="tech-num-badge">
+            <span class="tech-num">03</span>
+            <span class="tech-pill">PARISIAN CRIMPING</span>
+          </div>
+          <h3 class="tech-title">Hand-Crimped Seal</h3>
+          <p class="tech-body">
+            Every French glass flacon is crimped by hand at our Ashok Vihar atelier with a vacuum gold collar, hot wax-stamped with our golden monogram crest, and verified under optical magnification before entering the velvet presentation coffret.
           </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOUR MASTER COMPOSITIONS SHOWCASE
+       ========================================================================== -->
+  <section class="showcase-section">
+    <div class="container-amenca" style="text-align: center;">
+      
+      <div class="section-eyebrow">
+        ✦ THE CURRENT ARCHIVE ✦
+      </div>
+
+      <h2 class="section-heading">
+        Four Master Compositions
+      </h2>
+
+      <div class="orn" style="margin-bottom: 24px;"><i></i></div>
+
+      <p class="section-subtitle">
+        Each creation represents an unhurried exploration of mood, tension, and botanical mastery.
+      </p>
+
+      <!-- 4 Column Product Grid -->
+      <div class="product-grid-4">
+        
+        <!-- Flacon 1: THANDER -->
+        <article class="product-card">
+          <a href="product-thander.html" class="product-card-stage" aria-label="THANDER Flacon">
+            <img src="Product 4.jpeg" alt="THANDER Extrait Flacon" class="product-card-img">
+          </a>
+          <span class="card-spec-label">DARK MARINE EXTRAIT</span>
+          <a href="product-thander.html" class="card-title-link">
+            <h3 class="card-product-title">THANDER</h3>
+          </a>
+          <p class="card-notes-text">Storm Ozone · Crashing Saline Sea Salt · Smoked Birch Tar · Dark Ambergris</p>
+          <div class="card-price-row">
+            <span class="card-price-now">₹2,499</span>
+          </div>
+          <div class="card-action-btns">
+            <a href="product-thander.html" class="card-btn-details">DETAILS</a>
+            <button type="button" onclick="addToCart({ id: 'thander-50ml', name: 'THANDER', price: 2499, size: '50 ML', image: 'Product 4.jpeg', url: 'product-thander.html' })" class="card-btn-cart">ADD TO BAG</button>
+          </div>
+        </article>
+
+        <!-- Flacon 2: HAAWAS + ICE -->
+        <article class="product-card">
+          <a href="product-haawas-ice.html" class="product-card-stage" aria-label="HAAWAS + ICE Flacon">
+            <img src="product 1.jpeg" alt="HAAWAS + ICE Extrait Flacon" class="product-card-img">
+          </a>
+          <span class="card-spec-label">GLACIAL CITRUS AQUATIC</span>
+          <a href="product-haawas-ice.html" class="card-title-link">
+            <h3 class="card-product-title">HAAWAS + ICE</h3>
+          </a>
+          <p class="card-notes-text">Sub-Zero Italian Lemon · Glacial Lake Waters · Arctic Spearmint · Driftwood</p>
+          <div class="card-price-row">
+            <span class="card-price-now">₹2,299</span>
+          </div>
+          <div class="card-action-btns">
+            <a href="product-haawas-ice.html" class="card-btn-details">DETAILS</a>
+            <button type="button" onclick="addToCart({ id: 'haawas-ice-50ml', name: 'HAAWAS + ICE', price: 2299, size: '50 ML', image: 'product 1.jpeg', url: 'product-haawas-ice.html' })" class="card-btn-cart">ADD TO BAG</button>
+          </div>
+        </article>
+
+        <!-- Flacon 3: ROSE FLORA -->
+        <article class="product-card">
+          <a href="product-rose-flora.html" class="product-card-stage" aria-label="ROSE FLORA Flacon">
+            <img src="Product 2.jpeg" alt="ROSE FLORA Extrait Flacon" class="product-card-img">
+          </a>
+          <span class="card-spec-label">FRENCH FLORAL EXTRAIT</span>
+          <a href="product-rose-flora.html" class="card-title-link">
+            <h3 class="card-product-title">ROSE FLORA</h3>
+          </a>
+          <p class="card-notes-text">Damask Rose · Velvet Peony · White Tea · Bourbon Vanilla · Cashmere</p>
+          <div class="card-price-row">
+            <span class="card-price-now">₹2,199</span>
+          </div>
+          <div class="card-action-btns">
+            <a href="product-rose-flora.html" class="card-btn-details">DETAILS</a>
+            <button type="button" onclick="addToCart({ id: 'rose-flora-50ml', name: 'ROSE FLORA', price: 2199, size: '50 ML', image: 'Product 2.jpeg', url: 'product-rose-flora.html' })" class="card-btn-cart">ADD TO BAG</button>
+          </div>
+        </article>
+
+        <!-- Flacon 4: COOL WATER -->
+        <article class="product-card">
+          <a href="product-cool-water.html" class="product-card-stage" aria-label="COOL WATER Flacon">
+            <img src="Product 3.jpeg" alt="COOL WATER Extrait Flacon" class="product-card-img">
+          </a>
+          <span class="card-spec-label">SOLAR OCEAN AQUATIC</span>
+          <a href="product-cool-water.html" class="card-title-link">
+            <h3 class="card-product-title">COOL WATER</h3>
+          </a>
+          <p class="card-notes-text">Solar Sea Salt · Blue Lotus · Sunlit Coconut Sand · Clean Ocean Amber</p>
+          <div class="card-price-row">
+            <span class="card-price-now">₹1,999</span>
+          </div>
+          <div class="card-action-btns">
+            <a href="product-cool-water.html" class="card-btn-details">DETAILS</a>
+            <button type="button" onclick="addToCart({ id: 'cool-water-50ml', name: 'COOL WATER', price: 1999, size: '50 ML', image: 'Product 3.jpeg', url: 'product-cool-water.html' })" class="card-btn-cart">ADD TO BAG</button>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ATELIER PILLARS STRIP
+       ========================================================================== -->
+  <section class="pillars-strip">
+    <div class="container-amenca">
+      <div class="pillars-grid">
+        
+        <div class="pillar-item">
+          <div class="pillar-icon">🏛️</div>
+          <div>
+            <div class="pillar-title">HISTORIC ATELIER</div>
+            <div class="pillar-desc">Ashok Vihar, North West Delhi</div>
+          </div>
+        </div>
+
+        <div class="pillar-item">
+          <div class="pillar-icon">🌿</div>
+          <div>
+            <div class="pillar-title">BOTANICAL PURITY</div>
+            <div class="pillar-desc">Ethically Harvested Rare Resins</div>
+          </div>
+        </div>
+
+        <div class="pillar-item">
+          <div class="pillar-icon">⚡</div>
+          <div>
+            <div class="pillar-title">48H AIR DISPATCH</div>
+            <div class="pillar-desc">Free Insured Delivery Pan-India</div>
+          </div>
+        </div>
+
+        <div class="pillar-item">
+          <div class="pillar-icon">🛡️</div>
+          <div>
+            <div class="pillar-title">GOLD WAX SEAL</div>
+            <div class="pillar-desc">Hand-Applied Monogram Crest</div>
+          </div>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- CTA Banner -->
-  <section style="padding: 80px 20px; text-align: center;">
-    <div class="container-amenca" style="max-width: 700px;">
-      <h2 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 3.2vw, 2.4rem); letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); margin-bottom: 20px;">
+  <!-- ==========================================================================
+       CONCIERGE & BESPOKE APPOINTMENTS
+       ========================================================================== -->
+  <section class="appointments-section">
+    <div class="container-amenca">
+      <div class="appointments-card">
+        <div class="section-eyebrow" style="margin-bottom: 20px;">
+          ✦ ATELIER PRIVATE PRIVILEGE ✦
+        </div>
+        <h2 style="font-family: var(--font-serif); font-size: clamp(1.8rem, 3.2vw, 2.6rem); letter-spacing: 0.2em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 18px; background: linear-gradient(180deg, #FFFFFF 0%, #F5E5C9 40%, #D4A94A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          Bespoke Wardrobe &amp; Private Appointments
+        </h2>
+        <div class="orn" style="margin-bottom: 24px;"><i></i></div>
+        <p style="font-size: 12.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(240, 228, 211, 0.85); line-height: 1.85; max-width: 680px; margin: 0 auto 36px auto;">
+          Experience one-on-one olfactory consultations, bespoke bridal coffrets, and corporate gifting curated directly with our master compounding artisans in New Delhi.
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+          <a href="https://wa.me/918054917017" target="_blank" rel="noopener" class="gold-pill-btn">
+            WHATSAPP CONCIERGE: +91 8054917017
+          </a>
+          <a href="contact.html" class="wine-pill-btn">
+            INQUIRE VIA ATELIER CONCIERGE →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FINAL CTA: EXPERIENCE THE MASTER COMPOSITIONS
+       ========================================================================== -->
+  <section style="padding: 100px 20px; text-align: center; background: radial-gradient(circle at 50% 0%, rgba(94, 34, 56, 0.4) 0%, rgba(18, 7, 14, 0.98) 85%);">
+    <div class="container-amenca" style="max-width: 780px;">
+      <div class="section-eyebrow" style="margin-bottom: 18px;">
+        ✦ DISCOVER THE FULL SELECTION ✦
+      </div>
+      <h2 style="font-family: var(--font-serif); font-size: clamp(2rem, 3.6vw, 2.8rem); letter-spacing: 0.22em; text-transform: uppercase; color: #FFFFFF; margin-bottom: 18px; line-height: 1.2; background: linear-gradient(180deg, #FFFFFF 0%, #F5E5C9 40%, #D4A94A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
         Experience the Master Compositions
       </h2>
-      <a href="shop.html" class="gold-pill-btn">DISCOVER THE ARCHIVE →</a>
+      <div class="orn" style="margin-bottom: 26px;"><i></i></div>
+      <p style="font-size: 12px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240, 228, 211, 0.75); line-height: 1.8; margin-bottom: 38px;">
+        Every flacon arrives in our rigid wine presentation box wrapped in black tissue and sealed with our gold monogram wax crest. Complimentary insured express air shipping across India.
+      </p>
+      <a href="shop.html" class="gold-pill-btn" style="padding: 1.15rem 3rem; font-size: 0.82rem;">
+        DISCOVER THE ARCHIVE →
+      </a>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="w-full bg-ground text-ivory gold-border-t" style="padding: 80px 20px 40px 20px;">
-    <div class="container-amenca">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; padding-bottom: 60px; border-bottom: 1px solid var(--border-gold);">
-        <div>
-          <img src="Logo.png" alt="YOJAKI DE LUXE" style="height: 72px; width: auto; margin-bottom: 18px;">
-          <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: rgba(240, 228, 211, 0.7); line-height: 1.8;">
-            Artisanal Haute Parfumerie from New Delhi, India. Hand-bottled, cold-macerated, and meticulously composed.
-          </p>
-        </div>
-        <div>
-          <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.35em; color: var(--gold); font-weight: 500; margin-bottom: 16px;">NAVIGATION</h4>
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: rgba(240, 228, 211, 0.75);">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="shop.html">The Collection</a></li>
-            <li><a href="product-discovery-set.html">Discovery Coffret</a></li>
-            <li><a href="about.html">Our Atelier</a></li>
-            <li><a href="cart.html">Shopping Bag</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.35em; color: var(--gold); font-weight: 500; margin-bottom: 16px;">THE FLACONS</h4>
-          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: rgba(240, 228, 211, 0.75);">
-            <li><a href="product-thander.html">THANDER (50 ML)</a></li>
-            <li><a href="product-haawas-ice.html">HAAWAS + ICE (50 ML)</a></li>
-            <li><a href="product-rose-flora.html">ROSE FLORA (50 ML)</a></li>
-            <li><a href="product-cool-water.html">COOL WATER (50 ML)</a></li>
-            <li><a href="product-discovery-set.html">THE DISCOVERY COFFRET</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.35em; color: var(--gold); font-weight: 500; margin-bottom: 16px;">ATELIER CONTACT</h4>
-          <p style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: rgba(240, 228, 211, 0.75); line-height: 1.8;">
-            Maison Yojaki Atelier<br>
-            Ashok Vihar, New Delhi, India<br>
-            Concierge: +91 8054917017<br>
-            Email: concierge@yojaki.com
-          </p>
+  <!-- ==========================================================================
+       MODERN MINIMAL LUXURY FOOTER
+       ========================================================================== -->
+  <footer id="footer" class="amenca-luxury-footer">
+    <div class="footer-modern-grid">
+      <!-- Col 1: Brand Identity -->
+      <div class="footer-brand-col">
+        <a href="index.html" aria-label="Maison Yojaki Home">
+          <img src="Logo.png" alt="YOJAKI DE LUXE" class="footer-brand-logo">
+        </a>
+        <p class="footer-brand-text">
+          Artisanal Haute Parfumerie · Hand-bottled &amp; cold-macerated in New Delhi, India.
+        </p>
+        <a href="https://wa.me/918054917017" target="_blank" rel="noopener" class="footer-simple-concierge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          <span>WhatsApp Concierge: +91 8054917017</span>
+        </a>
+      </div>
+
+      <!-- Col 2: Essential Links -->
+      <div>
+        <h4 class="footer-col-header">EXPLORE</h4>
+        <ul class="footer-nav-simple">
+          <li><a href="shop.html">All Fragrances</a></li>
+          <li><a href="about.html">Our Atelier Story</a></li>
+          <li><a href="contact.html">Concierge &amp; Appointments</a></li>
+          <li><a href="cart.html">Shopping Bag</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Contact Us -->
+      <div class="footer-contact-wrap">
+        <h4 class="footer-col-header">CONTACT US</h4>
+        <div class="footer-contact-list">
+          <div class="footer-contact-item">
+            <span class="footer-contact-label">ATELIER LOCATION</span>
+            <span class="footer-contact-val">Ashok Vihar, North West Delhi, India · 110052</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="footer-contact-label">CONCIERGE &amp; WHATSAPP</span>
+            <a href="tel:+918054917017" class="footer-contact-val footer-contact-link">+91 8054917017</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="footer-contact-label">ATELIER EMAIL</span>
+            <a href="mailto:concierge@yojaki.com" class="footer-contact-val footer-contact-link">concierge@yojaki.com</a>
+          </div>
         </div>
       </div>
-      <div style="padding-top: 30px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(240, 228, 211, 0.5);">
-        <div>© 2026 YOJAKI DE LUXE. ALL RIGHTS RESERVED.</div>
-        <div style="display: flex; gap: 12px;">
-          <span>UPI / GPay</span>
-          <span>·</span>
-          <span>Cards</span>
-          <span>·</span>
-          <span>Cash on Delivery</span>
+    </div>
+
+    <!-- Sub-footer Bar -->
+    <div class="footer-bottom-bar">
+      <div class="footer-bottom-inner">
+        <div class="footer-copyright">
+          © 2026 YOJAKI HAUTE PARFUMERIE · ALL RIGHTS RESERVED.
         </div>
       </div>
     </div>
@@ -590,4 +1558,3 @@
   </script>
 </body>
 </html>
-

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Secure Atelier Checkout | YOJAKI DE LUXE</title>
+  <title>Secure Atelier Checkout | YOJAKI DE LUXE | Haute Parfumerie</title>
   <meta name="description" content="Secure checkout for Maison Yojaki. Encrypted payment via UPI, Credit/Debit Cards, or Cash on Delivery. Complimentary air express dispatch across India.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,11 +14,13 @@
     :root {
       --ground: #2A1320;
       --ground-dark: #1F0B17;
+      --noir: #0E030B;
       --gold: #D4A94A;
       --gold-light: #E6BF62;
+      --gold-bright: #F5CE76;
       --ivory: #F0E4D3;
       --wine-accent: #5E2238;
-      --border-gold: rgba(212, 169, 74, 0.24);
+      --border-gold: rgba(212, 169, 74, 0.28);
       --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --font-serif: 'Cinzel', serif;
       --font-display: 'Outfit', sans-serif;
@@ -31,11 +33,11 @@
     }
 
     body {
-      background-color: var(--ground);
+      background-color: var(--ground-dark);
       color: var(--ivory);
       font-family: var(--font-body);
       font-weight: 300;
-      line-height: 1.5;
+      line-height: 1.6;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
@@ -43,7 +45,7 @@
     a {
       color: inherit;
       text-decoration: none;
-      transition: color 0.25s ease, opacity 0.25s ease;
+      transition: color 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
     }
 
     img {
@@ -51,12 +53,6 @@
       height: auto;
       display: block;
     }
-
-    .bg-ground { background-color: var(--ground); }
-    .text-gold { color: var(--gold); }
-    .text-ivory { color: var(--ivory); }
-    .gold-border-b { border-bottom: 1px solid var(--border-gold); }
-    .gold-border-t { border-top: 1px solid var(--border-gold); }
 
     .container-amenca {
       width: 100%;
@@ -67,155 +63,563 @@
       padding-right: 20px;
     }
 
+    /* Buttons */
     .gold-pill-btn {
-      background-color: var(--gold);
-      color: var(--ground);
-      font-size: 0.72rem;
+      background: linear-gradient(90deg, #C5983A 0%, #F5CE76 50%, #C5983A 100%);
+      background-size: 200% auto;
+      color: #1F0B17 !important;
+      font-size: 0.78rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      font-weight: 600;
-      padding: 1rem 2.4rem;
+      font-weight: 800;
+      padding: 1.15rem 2.4rem;
       border-radius: 9999px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: background-color 0.25s ease, transform 0.2s ease;
-      cursor: pointer;
+      gap: 10px;
       border: none;
-      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(212, 169, 74, 0.35);
+      transition: all 0.3s ease;
+      text-decoration: none;
       width: 100%;
     }
     .gold-pill-btn:hover {
-      background-color: var(--gold-light);
-      transform: translateY(-1px);
+      background-position: right center;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(212, 169, 74, 0.5);
+    }
+    .gold-pill-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
     }
 
-    /* Form Fields */
+    /* Header */
+    .checkout-header {
+      width: 100%;
+      background: #0E030B;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(212, 169, 74, 0.35);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.55);
+      padding: 14px 0;
+    }
+    .checkout-header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .site-brand-logo {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      position: relative;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: radial-gradient(ellipse at center, rgba(212, 169, 74, 0.22) 0%, rgba(212, 169, 74, 0.05) 55%, transparent 75%);
+    }
+    .site-brand-logo img {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 10px rgba(245, 206, 118, 0.5)) brightness(1.12) contrast(1.06);
+      transition: transform 0.3s ease;
+    }
+    .site-brand-logo:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Step Breadcrumbs */
+    .checkout-progress-strip {
+      background: rgba(14, 5, 10, 0.7);
+      border-bottom: 1px solid rgba(212, 169, 74, 0.2);
+      padding: 14px 20px;
+      text-align: center;
+    }
+    .progress-steps {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(240, 228, 211, 0.5);
+    }
+    .step-item.active {
+      color: #E6BF62;
+      font-weight: 600;
+    }
+    .step-item.completed {
+      color: #D4A94A;
+    }
+    .step-sep {
+      color: rgba(212, 169, 74, 0.35);
+      font-size: 9px;
+    }
+
+    /* Form Inputs */
     .field-group {
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
     .field-label {
       display: block;
       font-size: 10px;
-      letter-spacing: 0.2em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(240, 228, 211, 0.75);
-      margin-bottom: 6px;
-      font-weight: 500;
+      color: rgba(240, 228, 211, 0.8);
+      margin-bottom: 8px;
+      font-weight: 600;
     }
     .form-input {
       width: 100%;
-      background: rgba(31, 11, 23, 0.85);
-      border: 1px solid var(--border-gold);
-      border-radius: 4px;
-      padding: 12px 14px;
+      background: rgba(18, 7, 14, 0.85);
+      border: 1px solid rgba(212, 169, 74, 0.3);
+      border-radius: 8px;
+      padding: 13px 16px;
       color: #F0E4D3;
       font-size: 13px;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       outline: none;
-      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      transition: all 0.25s ease;
     }
     .form-input:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 10px rgba(212, 169, 74, 0.25);
+      border-color: #E6BF62;
+      background: rgba(24, 9, 18, 0.95);
+      box-shadow: 0 0 15px rgba(212, 169, 74, 0.3);
     }
     select.form-input {
       cursor: pointer;
     }
-
-    /* Checkout Card Section */
-    .checkout-step-card {
-      background: rgba(31, 11, 23, 0.6);
-      border: 1px solid var(--border-gold);
-      border-radius: 6px;
-      padding: 24px;
-      margin-bottom: 24px;
+    .chk-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .chk-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 640px) {
+      .chk-grid-2,
+      .chk-grid-3 {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
     }
 
-    /* Payment Tab Pills */
-    .payment-tab {
-      padding: 12px 18px;
-      border: 1px solid var(--border-gold);
-      background: rgba(42, 19, 32, 0.6);
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 11px;
-      letter-spacing: 0.15em;
+    /* Step Cards */
+    .checkout-step-card {
+      background: radial-gradient(circle at 50% 10%, rgba(94, 34, 56, 0.35) 0%, rgba(31, 11, 23, 0.9) 80%);
+      border: 1px solid rgba(212, 169, 74, 0.3);
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 26px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      transition: border-color 0.3s ease;
+    }
+    .checkout-step-card:hover {
+      border-color: rgba(212, 169, 74, 0.45);
+    }
+    .step-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(212, 169, 74, 0.2);
+    }
+    .step-card-title {
+      font-family: var(--font-serif);
+      font-size: 16px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--ivory);
-      transition: all 0.25s ease;
+      color: #FFFFFF;
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .payment-tab.active {
-      border-color: var(--gold);
+    .step-pill-indicator {
+      font-size: 9.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #E6BF62;
       background: rgba(212, 169, 74, 0.12);
-      color: var(--gold);
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      border-radius: 9999px;
+      padding: 3px 10px;
       font-weight: 600;
     }
 
-    @media (max-width: 900px) {
+    /* Payment Tabs */
+    .payment-tab {
+      padding: 14px 18px;
+      border: 1px solid rgba(212, 169, 74, 0.3);
+      background: rgba(18, 7, 14, 0.7);
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.85);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .payment-tab:hover {
+      border-color: #E6BF62;
+      background: rgba(42, 19, 32, 0.6);
+      color: #FFFFFF;
+    }
+    .payment-tab.active {
+      border-color: #E6BF62;
+      background: radial-gradient(circle at center, rgba(212, 169, 74, 0.2) 0%, rgba(94, 34, 56, 0.4) 100%);
+      color: #E6BF62;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(212, 169, 74, 0.25);
+    }
+
+    /* Right: Order Summary Sidebar */
+    .checkout-summary-card {
+      position: sticky;
+      top: 100px;
+      background: radial-gradient(circle at 50% 10%, rgba(94, 34, 56, 0.4) 0%, rgba(31, 11, 23, 0.95) 80%);
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      border-radius: 18px;
+      padding: 32px 26px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+    }
+    .summary-heading {
+      font-family: var(--font-serif);
+      font-size: 17px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(212, 169, 74, 0.25);
+    }
+
+    /* Flacon Item in Checkout Summary */
+    .chk-item-thumb {
+      width: 58px;
+      height: 58px;
+      background: radial-gradient(circle at 50% 40%, rgba(94, 34, 56, 0.45) 0%, rgba(18, 7, 14, 0.95) 75%);
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      position: relative;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    .chk-item-thumb img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+    .chk-item-qty {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #D4A94A;
+      color: #1F0B17;
+      font-weight: 700;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 9.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: monospace;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Footer */
+    .amenca-luxury-footer {
+      background-color: #170812;
+      color: #F0E4D3;
+      padding: 55px 24px 0 24px;
+      border-top: 1px solid rgba(212, 169, 74, 0.24);
+      position: relative;
+    }
+    .footer-modern-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1.3fr;
+      gap: 50px;
+    }
+    .footer-brand-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .footer-brand-logo {
+      height: 48px;
+      width: auto;
+      margin-bottom: 16px;
+      filter: drop-shadow(0 2px 8px rgba(212, 169, 74, 0.25));
+    }
+    .footer-brand-text {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      line-height: 1.7;
+      color: rgba(240, 228, 211, 0.7);
+      margin-bottom: 18px;
+      max-width: 320px;
+      text-transform: uppercase;
+    }
+    .footer-simple-concierge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: rgba(212, 169, 74, 0.1);
+      border: 1px solid rgba(212, 169, 74, 0.35);
+      border-radius: 9999px;
+      padding: 8px 18px;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .footer-simple-concierge:hover {
+      background: rgba(212, 169, 74, 0.2);
+      border-color: #E6BF62;
+      color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+    .footer-simple-concierge svg {
+      width: 14px;
+      height: 14px;
+    }
+    .footer-col-header {
+      font-family: var(--font-serif);
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .footer-nav-simple {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-nav-simple a {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(240, 228, 211, 0.75);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-nav-simple a:hover {
+      color: #FFFFFF;
+      transform: translateX(4px);
+    }
+    .footer-nav-simple a::before {
+      content: '✦';
+      font-size: 7px;
+      color: #D4A94A;
+      opacity: 0.5;
+    }
+    .footer-contact-wrap {
+      display: flex;
+      flex-direction: column;
+    }
+    .footer-contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .footer-contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .footer-contact-label {
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #E6BF62;
+      font-weight: 600;
+    }
+    .footer-contact-val {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: rgba(240, 228, 211, 0.75);
+      line-height: 1.6;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+    .footer-contact-link:hover {
+      color: #FFFFFF;
+    }
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(212, 169, 74, 0.18);
+      padding: 22px 0;
+      margin-top: 48px;
+    }
+    .footer-bottom-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .footer-copyright {
+      font-size: 10.5px;
+      letter-spacing: 0.18em;
+      color: rgba(240, 228, 211, 0.55);
+      text-transform: uppercase;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 960px) {
       #checkout-layout {
         grid-template-columns: 1fr !important;
+        gap: 32px;
       }
       #checkout-summary-col {
         order: -1;
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .amenca-luxury-footer {
+        padding: 42px 18px 0 18px;
+        text-align: center;
+      }
+      .footer-modern-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        text-align: center;
+      }
+      .footer-brand-col {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-brand-text {
+        margin: 0 auto 16px auto;
+      }
+      .footer-col-header {
+        margin-bottom: 14px;
+      }
+      .footer-nav-simple {
+        align-items: center;
+      }
+      .footer-contact-wrap {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-contact-item {
+        align-items: center;
+        text-align: center;
+      }
+      .footer-bottom-bar {
+        margin-top: 32px;
+        padding: 18px 0;
+      }
+      .footer-bottom-inner {
+        justify-content: center;
+        text-align: center;
+      }
+      .footer-copyright {
+        font-size: 9.5px;
+        letter-spacing: 0.12em;
       }
     }
   </style>
 </head>
 <body class="bg-ground text-ivory">
 
-  <!-- Simplified Luxury Checkout Header -->
-  <header class="w-full bg-ground gold-border-b" style="padding: 20px 0;">
-    <div class="container-amenca" style="display: flex; align-items: center; justify-content: space-between;">
-      <a href="index.html" style="display: flex; align-items: center; gap: 12px;">
-        <img src="Logo.png" alt="YOJAKI DE LUXE" style="height: 68px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 10px rgba(212, 169, 74, 0.28));">
+  <!-- ==========================================================================
+       LUXURY CHECKOUT HEADER
+       ========================================================================== -->
+  <header class="checkout-header">
+    <div class="container-amenca checkout-header-inner">
+      <a href="index.html" class="site-brand-logo" aria-label="Maison Yojaki Home">
+        <img src="Logo.png" alt="YOJAKI DE LUXE">
       </a>
 
-      <div style="display: flex; align-items: center; gap: 16px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; flex-wrap: wrap;">
-        <div style="display: flex; align-items: center; gap: 6px; color: var(--gold);">
-          <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
+      <div style="display: flex; align-items: center; gap: 18px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; flex-wrap: wrap;">
+        <div style="display: flex; align-items: center; gap: 6px; color: #E6BF62; font-weight: 600;">
+          <svg style="width: 15px; height: 15px;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"/></svg>
           <span>256-Bit SSL Encrypted</span>
         </div>
-        <span style="opacity: 0.3;">|</span>
-        <a href="shop.html" style="color: rgba(240, 228, 211, 0.7);" onmouseover="this.style.color='#D4A94A'" onmouseout="this.style.color='rgba(240, 228, 211, 0.7)'">
-          Shop
-        </a>
-        <span style="opacity: 0.3;">|</span>
-        <a href="cart.html" style="color: rgba(240, 228, 211, 0.7);" onmouseover="this.style.color='#D4A94A'" onmouseout="this.style.color='rgba(240, 228, 211, 0.7)'">
+        <span style="opacity: 0.3; color: #D4A94A;">|</span>
+        <a href="cart.html" style="color: rgba(240, 228, 211, 0.75); display: inline-flex; align-items: center; gap: 6px;" onmouseover="this.style.color='#E6BF62'" onmouseout="this.style.color='rgba(240, 228, 211, 0.75)'">
           ← Return to Bag
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Checkout Main Container -->
-  <main style="padding: 40px 20px 80px 20px;">
+  <!-- Step Progress Strip -->
+  <div class="checkout-progress-strip">
+    <div class="progress-steps">
+      <span class="step-item completed">✓ 01 Bag</span>
+      <span class="step-sep">➔</span>
+      <span class="step-item active">✦ 02 Dispatch Destination</span>
+      <span class="step-sep">➔</span>
+      <span class="step-item active">✦ 03 Secure Payment</span>
+    </div>
+  </div>
+
+  <!-- Main Checkout Container -->
+  <main style="padding: 50px 20px 100px 20px;">
     <div class="container-amenca">
       
-      <div id="checkout-layout" style="display: grid; grid-template-columns: 1fr 420px; gap: 40px; align-items: start;">
+      <div id="checkout-layout" style="display: grid; grid-template-columns: 1fr 420px; gap: 45px; align-items: start;">
         
         <!-- Left: Form Steps -->
         <div>
           
-          <!-- Express Checkout Options -->
-          <div class="checkout-step-card" style="text-align: center; background: rgba(94, 34, 56, 0.2);">
-            <div style="font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; font-weight: 600;">
-              EXPRESS 1-CLICK ATELIER CHECKOUT
+          <!-- Express 1-Click Checkout -->
+          <div class="checkout-step-card" style="text-align: center; background: radial-gradient(circle at 50% 0%, rgba(94, 34, 56, 0.45) 0%, rgba(31, 11, 23, 0.85) 80%);">
+            <div style="font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #E6BF62; margin-bottom: 14px; font-weight: 700;">
+              ✦ EXPRESS 1-CLICK ATELIER CHECKOUT ✦
             </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-              <button type="button" onclick="quickFillAndPay('UPI')" class="payment-tab active" style="justify-content: center; background: #000; border-color: #D4A94A;">
-                <span style="color: #D4A94A; font-weight: 700;">GPay / PhonePe UPI</span>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+              <button type="button" onclick="quickFillAndPay('UPI')" class="payment-tab active" style="background: rgba(18, 7, 14, 0.85); border-color: #E6BF62;">
+                <span style="color: #E6BF62; font-weight: 700;">GPay / PhonePe UPI</span>
               </button>
-              <button type="button" onclick="quickFillAndPay('CARD')" class="payment-tab" style="justify-content: center; background: #000;">
+              <button type="button" onclick="quickFillAndPay('CARD')" class="payment-tab" style="background: rgba(18, 7, 14, 0.85);">
                 <span>Credit / Debit Card</span>
               </button>
             </div>
-            <div style="position: relative; margin: 20px 0; text-align: center;">
-              <div style="height: 1px; background: var(--border-gold);"></div>
-              <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #2A1320; padding: 0 14px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240, 228, 211, 0.5);">OR COMPLETE DETAILS BELOW</span>
+            <div style="position: relative; margin: 24px 0 10px 0; text-align: center;">
+              <div style="height: 1px; background: rgba(212, 169, 74, 0.25);"></div>
+              <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #230d1b; padding: 0 16px; font-size: 9.5px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(240, 228, 211, 0.55);">OR COMPLETE ATELIER RESERVATION</span>
             </div>
           </div>
 
@@ -223,50 +627,50 @@
 
             <!-- STEP 1: Contact Information -->
             <section class="checkout-step-card">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;">
-                <h2 style="font-family: var(--font-serif); font-size: 15px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);">
-                  1. CONTACT INFORMATION
+              <div class="step-card-header">
+                <h2 class="step-card-title">
+                  <span>1.</span> CONTACT INFORMATION
                 </h2>
-                <span style="font-size: 10px; letter-spacing: 0.15em; color: rgba(240, 228, 211, 0.5);">STEP 1 OF 3</span>
+                <span class="step-pill-indicator">STEP 1 OF 3</span>
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="cust-email">Email Address (For Order Invoice & Tracking)</label>
-                <input type="email" id="cust-email" required placeholder="vikram@example.com" class="form-input" value="connoisseur@yojaki.com">
+                <label class="field-label" for="cust-email">Email Address (For Order Certificate &amp; Tracking)</label>
+                <input type="email" id="cust-email" required placeholder="connoisseur@example.com" class="form-input" value="connoisseur@yojaki.com">
               </div>
 
               <div class="field-group">
-                <label class="field-label" for="cust-phone">WhatsApp / Mobile Number (For Courier SMS Updates)</label>
+                <label class="field-label" for="cust-phone">WhatsApp / Mobile Number (For Courier SMS &amp; Dispatch OTP)</label>
                 <input type="tel" id="cust-phone" required placeholder="+91 98765 43210" class="form-input" value="+91 98101 23456">
               </div>
             </section>
 
             <!-- STEP 2: Delivery Address -->
             <section class="checkout-step-card">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;">
-                <h2 style="font-family: var(--font-serif); font-size: 15px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);">
-                  2. ATELIER DISPATCH DESTINATION
+              <div class="step-card-header">
+                <h2 class="step-card-title">
+                  <span>2.</span> ATELIER DISPATCH DESTINATION
                 </h2>
-                <span style="font-size: 10px; letter-spacing: 0.15em; color: rgba(240, 228, 211, 0.5);">STEP 2 OF 3</span>
+                <span class="step-pill-indicator">STEP 2 OF 3</span>
               </div>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+              <div class="chk-grid-2">
                 <div class="field-group">
                   <label class="field-label" for="cust-first-name">First Name</label>
-                  <input type="text" id="cust-first-name" required placeholder="Vikram" class="form-input" value="Vikramaditya">
+                  <input type="text" id="cust-first-name" required placeholder="Vikramaditya" class="form-input" value="Vikramaditya">
                 </div>
                 <div class="field-group">
                   <label class="field-label" for="cust-last-name">Last Name</label>
-                  <input type="text" id="cust-last-name" required placeholder="Sharma" class="form-input" value="Singhania">
+                  <input type="text" id="cust-last-name" required placeholder="Singhania" class="form-input" value="Singhania">
                 </div>
               </div>
 
               <div class="field-group">
                 <label class="field-label" for="cust-address">Street Address, Bungalow / Suite</label>
-                <input type="text" id="cust-address" required placeholder="Villa 14, Heritage Enclave" class="form-input" value="Bungalow 42, Civil Lines">
+                <input type="text" id="cust-address" required placeholder="Bungalow 42, Civil Lines" class="form-input" value="Bungalow 42, Civil Lines">
               </div>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;">
+              <div class="chk-grid-3">
                 <div class="field-group">
                   <label class="field-label" for="cust-city">City</label>
                   <input type="text" id="cust-city" required placeholder="New Delhi" class="form-input" value="New Delhi">
@@ -295,31 +699,31 @@
                 </div>
               </div>
 
-              <!-- Shipping Method Pill -->
-              <div style="border: 1px solid var(--gold); background: rgba(212, 169, 74, 0.08); padding: 14px 18px; border-radius: 4px; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
+              <!-- Shipping Reassurance Pill -->
+              <div style="border: 1px solid rgba(212, 169, 74, 0.4); background: rgba(212, 169, 74, 0.08); padding: 16px 20px; border-radius: 10px; display: flex; align-items: center; justify-content: space-between; margin-top: 10px;">
                 <div>
-                  <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); font-weight: 600;">
+                  <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #E6BF62; font-weight: 700;">
                     ✦ Bluedart Air Express (48h Dispatch)
                   </div>
-                  <div style="font-size: 10px; color: rgba(240, 228, 211, 0.65); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 2px;">
-                    Sealed in temperature-regulated cold boxes with gold wax monogram
+                  <div style="font-size: 10px; color: rgba(240, 228, 211, 0.7); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 3px;">
+                    Hand-sealed in rigid wine boxes with gold monogram wax crest
                   </div>
                 </div>
-                <span style="font-size: 11px; font-weight: 600; color: var(--gold); letter-spacing: 0.1em;">FREE</span>
+                <span style="font-size: 11px; font-weight: 700; color: #E6BF62; letter-spacing: 0.1em;">FREE</span>
               </div>
             </section>
 
             <!-- STEP 3: Payment Method -->
             <section class="checkout-step-card">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;">
-                <h2 style="font-family: var(--font-serif); font-size: 15px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);">
-                  3. PAYMENT METHOD
+              <div class="step-card-header">
+                <h2 class="step-card-title">
+                  <span>3.</span> PAYMENT METHOD
                 </h2>
-                <span style="font-size: 10px; letter-spacing: 0.15em; color: rgba(240, 228, 211, 0.5);">STEP 3 OF 3</span>
+                <span class="step-pill-indicator">STEP 3 OF 3</span>
               </div>
 
               <!-- Tabs -->
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-bottom: 20px;" id="payment-tabs-group">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 22px;" id="payment-tabs-group">
                 <button type="button" class="payment-tab active" onclick="switchPayment('upi', this)">
                   <span>✦ UPI / QR</span>
                 </button>
@@ -334,48 +738,48 @@
                 </button>
               </div>
 
-              <!-- Payment Form Body -->
+              <!-- UPI Tab -->
               <div id="payment-body-upi" style="display: block;">
-                <div style="border: 1px solid var(--border-gold); padding: 18px; border-radius: 4px; background: rgba(0,0,0,0.3); text-align: center;">
-                  <div style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px;">
-                    Scan & Pay with Any UPI App
+                <div style="border: 1px solid rgba(212, 169, 74, 0.35); padding: 22px; border-radius: 12px; background: rgba(14, 5, 10, 0.7); text-align: center;">
+                  <div style="font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #E6BF62; margin-bottom: 12px; font-weight: 600;">
+                    Scan &amp; Pay with Any Indian UPI App
                   </div>
-                  <div style="width: 140px; height: 140px; margin: 12px auto; background: #fff; padding: 10px; border-radius: 4px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(0,0,0,0.5);">
-                    <!-- Simulated Luxury QR code -->
+                  <div style="width: 150px; height: 150px; margin: 14px auto; background: #fff; padding: 12px; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 25px rgba(0,0,0,0.6); border: 2px solid #D4A94A;">
                     <svg viewBox="0 0 100 100" style="width: 100%; height: 100%;">
                       <rect width="100" height="100" fill="#fff"/>
-                      <rect x="10" y="10" width="25" height="25" fill="#2A1320"/>
+                      <rect x="10" y="10" width="25" height="25" fill="#1F0B17"/>
                       <rect x="15" y="15" width="15" height="15" fill="#fff"/>
                       <rect x="18" y="18" width="9" height="9" fill="#D4A94A"/>
-                      <rect x="65" y="10" width="25" height="25" fill="#2A1320"/>
+                      <rect x="65" y="10" width="25" height="25" fill="#1F0B17"/>
                       <rect x="70" y="15" width="15" height="15" fill="#fff"/>
                       <rect x="73" y="18" width="9" height="9" fill="#D4A94A"/>
-                      <rect x="10" y="65" width="25" height="25" fill="#2A1320"/>
+                      <rect x="10" y="65" width="25" height="25" fill="#1F0B17"/>
                       <rect x="15" y="70" width="15" height="15" fill="#fff"/>
                       <rect x="18" y="73" width="9" height="9" fill="#D4A94A"/>
-                      <rect x="42" y="15" width="16" height="6" fill="#2A1320"/>
-                      <rect x="42" y="30" width="6" height="16" fill="#2A1320"/>
-                      <rect x="52" y="30" width="6" height="16" fill="#2A1320"/>
-                      <rect x="42" y="55" width="26" height="6" fill="#2A1320"/>
-                      <rect x="42" y="70" width="16" height="6" fill="#2A1320"/>
-                      <rect x="70" y="70" width="16" height="16" fill="#2A1320"/>
+                      <rect x="42" y="15" width="16" height="6" fill="#1F0B17"/>
+                      <rect x="42" y="30" width="6" height="16" fill="#1F0B17"/>
+                      <rect x="52" y="30" width="6" height="16" fill="#1F0B17"/>
+                      <rect x="42" y="55" width="26" height="6" fill="#1F0B17"/>
+                      <rect x="42" y="70" width="16" height="6" fill="#1F0B17"/>
+                      <rect x="70" y="70" width="16" height="16" fill="#1F0B17"/>
                     </svg>
                   </div>
-                  <div style="font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(240, 228, 211, 0.7); margin-bottom: 12px;">
-                    UPI ID: <span style="color: var(--gold); font-family: monospace;">yojaki@icici</span>
+                  <div style="font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(240, 228, 211, 0.85); margin-bottom: 12px;">
+                    UPI ID: <span style="color: #E6BF62; font-family: monospace; font-weight: 700;">yojaki@icici</span>
                   </div>
-                  <div style="font-size: 10px; color: rgba(240, 228, 211, 0.5); letter-spacing: 0.1em; text-transform: uppercase;">
+                  <div style="font-size: 10px; color: rgba(240, 228, 211, 0.6); letter-spacing: 0.14em; text-transform: uppercase;">
                     Supported: Google Pay · PhonePe · Paytm · BHIM · CRED
                   </div>
                 </div>
               </div>
 
+              <!-- Card Tab -->
               <div id="payment-body-card" style="display: none;">
                 <div class="field-group">
                   <label class="field-label" for="card-num">Card Number</label>
                   <input type="text" id="card-num" placeholder="4111 2222 3333 4444" maxlength="19" class="form-input">
                 </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                   <div class="field-group">
                     <label class="field-label" for="card-exp">Expiry (MM/YY)</label>
                     <input type="text" id="card-exp" placeholder="12/28" maxlength="5" class="form-input">
@@ -387,6 +791,7 @@
                 </div>
               </div>
 
+              <!-- Net Banking Tab -->
               <div id="payment-body-netbanking" style="display: none;">
                 <div class="field-group">
                   <label class="field-label" for="nb-select">Select Bank</label>
@@ -400,16 +805,17 @@
                 </div>
               </div>
 
+              <!-- COD Tab -->
               <div id="payment-body-cod" style="display: none;">
-                <div style="border: 1px solid var(--border-gold); padding: 18px; border-radius: 4px; background: rgba(0,0,0,0.3); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(240, 228, 211, 0.8); line-height: 1.8;">
-                  ✦ Cash on Delivery is available across all serviceable Indian PIN codes. Please have the exact payment amount ready upon courier arrival.
+                <div style="border: 1px solid rgba(212, 169, 74, 0.35); padding: 22px; border-radius: 12px; background: rgba(14, 5, 10, 0.7); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(240, 228, 211, 0.85); line-height: 1.85;">
+                  ✦ Cash on Delivery is available across all serviceable Indian PIN codes. Please have the exact payment ready upon arrival of the Bluedart air courier.
                 </div>
               </div>
             </section>
 
             <!-- Complete Order CTA -->
-            <button type="submit" id="submit-order-btn" class="gold-pill-btn" style="padding: 1.15rem; font-size: 12px; margin-top: 10px;">
-              CONFIRM & COMPLETE ATELIER ORDER →
+            <button type="submit" id="submit-order-btn" class="gold-pill-btn">
+              CONFIRM &amp; COMPLETE ATELIER ORDER →
             </button>
 
           </form>
@@ -417,9 +823,9 @@
         </div>
 
         <!-- Right: Order Summary Sidebar -->
-        <div id="checkout-summary-col" style="position: sticky; top: 30px; background: rgba(31, 11, 23, 0.85); border: 1px solid var(--border-gold); border-radius: 6px; padding: 26px; box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+        <div id="checkout-summary-col" class="checkout-summary-card">
           
-          <h3 style="font-family: var(--font-serif); font-size: 15px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ivory); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border-gold);">
+          <h3 class="summary-heading">
             YOUR ATELIER FLACONS
           </h3>
 
@@ -429,39 +835,43 @@
           </div>
 
           <!-- Applied Voucher Note -->
-          <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(212, 169, 74, 0.1); border: 1px solid rgba(212, 169, 74, 0.3); padding: 10px 14px; border-radius: 4px; margin-bottom: 20px; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;">
-            <div style="display: flex; align-items: center; gap: 8px; color: var(--gold);">
+          <div style="display: flex; align-items: center; justify-content: space-between; background: rgba(212, 169, 74, 0.12); border: 1px solid rgba(212, 169, 74, 0.35); padding: 12px 16px; border-radius: 10px; margin-bottom: 22px; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;">
+            <div style="display: flex; align-items: center; gap: 8px; color: #E6BF62; font-weight: 600;">
               <span>✦</span>
               <span>CODE: <strong>AMENCA50</strong></span>
             </div>
-            <span style="color: #D4A94A; font-weight: 600;">50% SAVING</span>
+            <span style="color: #E6BF62; font-weight: 700;">50% SAVING</span>
           </div>
 
           <!-- Price Calculation -->
-          <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--border-gold); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;">
-            <div style="display: flex; justify-content: space-between; color: rgba(240, 228, 211, 0.75);">
+          <div style="display: flex; flex-direction: column; gap: 14px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid rgba(212, 169, 74, 0.22); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase;">
+            <div style="display: flex; justify-content: space-between; color: rgba(240, 228, 211, 0.78);">
               <span>Flacon Subtotal</span>
               <span id="chk-subtotal" style="font-family: monospace;">₹0</span>
             </div>
-            <div style="display: flex; justify-content: space-between; color: #D4A94A;">
+            <div style="display: flex; justify-content: space-between; color: #E6BF62; font-weight: 600;">
               <span>Atelier Festive Saving</span>
               <span id="chk-discount" style="font-family: monospace;">-₹0</span>
             </div>
-            <div style="display: flex; justify-content: space-between; color: rgba(240, 228, 211, 0.75);">
+            <div style="display: flex; justify-content: space-between; color: rgba(240, 228, 211, 0.78);">
               <span>Express Air Courier</span>
-              <span style="color: #D4A94A; font-weight: 600;">FREE</span>
+              <span style="color: #E6BF62; font-weight: 700;">FREE</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; color: rgba(240, 228, 211, 0.78);">
+              <span>Wax-Sealed Wine Coffret</span>
+              <span style="color: #E6BF62; font-weight: 700;">COMPLIMENTARY</span>
             </div>
           </div>
 
           <!-- Final Total -->
           <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 24px;">
-            <span style="font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ivory); font-weight: 500;">AMOUNT PAYABLE</span>
-            <span id="chk-grand-total" style="font-size: 24px; font-weight: 600; color: var(--gold); font-family: monospace;">₹0</span>
+            <span style="font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: #FFFFFF; font-weight: 600;">AMOUNT PAYABLE</span>
+            <span id="chk-grand-total" style="font-size: 26px; font-weight: 700; color: #D4A94A; font-family: monospace;">₹0</span>
           </div>
 
           <!-- Reassurance -->
-          <div style="border-top: 1px solid rgba(212, 169, 74, 0.15); padding-top: 18px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(240, 228, 211, 0.6); line-height: 1.8;">
-            <p style="margin-bottom: 8px;">✦ Concierge Support: +91 8054917017</p>
+          <div style="border-top: 1px solid rgba(212, 169, 74, 0.18); padding-top: 18px; font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(240, 228, 211, 0.65); line-height: 1.8;">
+            <p style="margin-bottom: 6px;">✦ <strong>Concierge Support:</strong> +91 8054917017</p>
             <p>✦ Dispatched with gold wax seal from North West Delhi, India</p>
           </div>
 
@@ -471,6 +881,66 @@
 
     </div>
   </main>
+
+  <!-- ==========================================================================
+       MODERN MINIMAL LUXURY FOOTER
+       ========================================================================== -->
+  <footer id="footer" class="amenca-luxury-footer">
+    <div class="footer-modern-grid">
+      <!-- Col 1: Brand Identity -->
+      <div class="footer-brand-col">
+        <a href="index.html" aria-label="Maison Yojaki Home">
+          <img src="Logo.png" alt="YOJAKI DE LUXE" class="footer-brand-logo">
+        </a>
+        <p class="footer-brand-text">
+          Artisanal Haute Parfumerie · Hand-bottled &amp; cold-macerated in New Delhi, India.
+        </p>
+        <a href="https://wa.me/918054917017" target="_blank" rel="noopener" class="footer-simple-concierge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+          <span>WhatsApp Concierge: +91 8054917017</span>
+        </a>
+      </div>
+
+      <!-- Col 2: Essential Links -->
+      <div>
+        <h4 class="footer-col-header">EXPLORE</h4>
+        <ul class="footer-nav-simple">
+          <li><a href="shop.html">All Fragrances</a></li>
+          <li><a href="about.html">Our Atelier Story</a></li>
+          <li><a href="contact.html">Concierge &amp; Appointments</a></li>
+          <li><a href="cart.html">Shopping Bag</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Contact Us -->
+      <div class="footer-contact-wrap">
+        <h4 class="footer-col-header">CONTACT US</h4>
+        <div class="footer-contact-list">
+          <div class="footer-contact-item">
+            <span class="footer-contact-label">ATELIER LOCATION</span>
+            <span class="footer-contact-val">Ashok Vihar, North West Delhi, India · 110052</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="footer-contact-label">CONCIERGE &amp; WHATSAPP</span>
+            <a href="tel:+918054917017" class="footer-contact-val footer-contact-link">+91 8054917017</a>
+          </div>
+          <div class="footer-contact-item">
+            <span class="footer-contact-label">ATELIER EMAIL</span>
+            <a href="mailto:concierge@yojaki.com" class="footer-contact-val footer-contact-link">concierge@yojaki.com</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-footer Bar -->
+    <div class="footer-bottom-bar">
+      <div class="footer-bottom-inner">
+        <div class="footer-copyright">
+          © 2026 YOJAKI HAUTE PARFUMERIE · ALL RIGHTS RESERVED.
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script src="cart.js"></script>
   <script>
@@ -506,22 +976,20 @@
       }
 
       list.innerHTML = totals.cart.map(item => `
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <div style="position: relative; width: 52px; height: 52px; background: #FAF7F2; border: 1px solid var(--border-gold); border-radius: 4px; display: flex; align-items: center; justify-content: center; padding: 4px; flex-shrink: 0;">
-            <img src="${item.image}" alt="${item.name}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
-            <span style="position: absolute; top: -6px; right: -6px; background: #2A1320; color: #D4A94A; border: 1px solid #D4A94A; border-radius: 50%; width: 18px; height: 18px; font-size: 9px; display: flex; align-items: center; justify-content: center; font-family: monospace;">
-              ${item.quantity}
-            </span>
+        <div style="display: flex; gap: 14px; align-items: center;">
+          <div class="chk-item-thumb">
+            <img src="${item.image}" alt="${item.name}">
+            <span class="chk-item-qty">${item.quantity}</span>
           </div>
           <div style="flex: 1; min-width: 0;">
-            <div style="font-family: var(--font-serif); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ivory); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            <div style="font-family: var(--font-serif); font-size: 13px; letter-spacing: 0.16em; text-transform: uppercase; color: #FFFFFF; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
               ${item.name}
             </div>
-            <div style="font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold);">
+            <div style="font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: #D4A94A;">
               ${item.size}
             </div>
           </div>
-          <div style="font-size: 12px; font-weight: 600; color: var(--ivory); font-family: monospace;">
+          <div style="font-size: 14px; font-weight: 700; color: #E6BF62; font-family: monospace;">
             ${formatINR(item.price * item.quantity)}
           </div>
         </div>
@@ -537,7 +1005,7 @@
       e.preventDefault();
       const btn = document.getElementById('submit-order-btn');
       btn.disabled = true;
-      btn.textContent = 'TRANSMITTING TO DELPHI ATELIER CELLAR...';
+      btn.textContent = 'TRANSMITTING TO ATELIER CELLAR...';
 
       const totals = getCartTotals();
       const orderNumber = 'YOJ-' + Math.floor(10000 + Math.random() * 90000);
@@ -573,4 +1041,3 @@
   </script>
 </body>
 </html>
-
